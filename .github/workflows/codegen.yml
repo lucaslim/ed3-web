@@ -1,0 +1,30 @@
+
+name: GraphQL Schema Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_env:
+        type: choice
+        description: Environment you want to check against
+        required: false
+        default: stage
+        options:
+          - stage
+          - dev
+          - prod
+
+jobs:
+  update-graphql-schema:
+    name: Update GraphQL Schema
+    runs-on: ubuntu-latest
+    steps:
+      - name: running scripts    
+        uses: actions/github-script@v6
+        env:
+          REACT_APP_SERVICES_ENV: ${{ github.event.inputs.app_env }}
+        with:
+          script: |
+            console.log(process.env);
+            console.log("i'm being triggered!")
+    
