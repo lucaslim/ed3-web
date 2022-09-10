@@ -46,8 +46,7 @@ jobs:
           committer: GitHub <itsa@me.mar.io>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: feature/schema-update
-          branch-suffix: timestamp
+          branch:  lucaslim-patch-1
           delete-branch: true
           title: '[bot] Update GraphQL Schema'
           body: |
