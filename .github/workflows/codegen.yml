@@ -19,6 +19,9 @@ jobs:
     name: Update GraphQL Schema
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
       - name: running scripts    
         uses: actions/github-script@v6
         env:
