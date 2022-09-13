@@ -16,38 +16,7 @@ jobs:
       - name: Check PR Limit
         uses: lucaslim/pull-request-limiter-action@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
           limit: 2
           auto_close: false
-          body: |
-            Hello **@{{ pull_request.user.login }}**
-
-            You currently have too many opened Pull Requests. Please close this and reopen it once you have less than 3 opened Pull Requests.
-            For more information, please refer to our [Pull Request Checklist](https://einc.atlassian.net/l/cp/d84EDpzo). 
-
-            Or you could also...
-            - Ask a repository administators to bypass this check.
-            - See if any of your open Pull Requests can be improved.
-            - Ask reviewers to review your opened Pull Requests.
-            - Review Pull Requests from other developers.
-            - Improve our documentation.
-  ensure-labels:
-    name: Ensure PR has a category label
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
-    steps:
-      - name: Find repository labels
-        uses: actions/github-script@v6
-        id: get_category_labels
-        with:
-          script: |
-            const owner = context.payload.organization.login;
-            const repo = context.payload.repository.name;
-            const labels = await github.rest.issues.listLabelsForRepo({ owner, repo });
-            return labels.data.map(l => l.name).filter(l => l.startsWith('category/')).join();
-          result-encoding: string
-      - uses: docker://agilepathway/pull-request-label-checker:latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          any_of: ${{ steps.get_category_labels.outputs.result }}
-          none_of: merge/blocked
+          body: yo
