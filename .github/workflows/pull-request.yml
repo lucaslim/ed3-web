@@ -18,6 +18,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           limit: 2
+          auto_close: false
           body: |
             Hello **@{{ pull_request.user.login }}**
 
