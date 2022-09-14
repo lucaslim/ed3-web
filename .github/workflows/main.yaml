@@ -36,7 +36,7 @@ jobs:
             - Improve our documentation.
             
       - name: '[SKIP] Not a pull request'
-        if: github.event.action != opened && github.event.action != reopened && github.event.action != ready_for_review
+        if: github.event.action != 'opened' && github.event.action != 'reopened' && github.event.action != 'ready_for_review'
         run: echo "No checks needed. Moving on..."
 
   test:
