@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           limit: 2
           auto_close: false
-          body: |
+          message: |
             You currently have too many opened Pull Requests. Please close this and reopen it once you have less than ${limit}.
       
             **For more information, please refer to our [Pull Request Guidelines](https://einc.atlassian.net/l/cp/d84EDpzo).**
