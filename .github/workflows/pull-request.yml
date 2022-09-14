@@ -1,0 +1,32 @@
+name: Check
+
+on:
+  pull_request:
+    types: [opened, synchronized, reopened, ready_for_review, labeled, unlabeled]
+
+jobs:
+  limit-pr-per-author:
+    name: Limit number of open PRs by author
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      # must keep this extra checkout step until this bug is fixed: https://github.com/actions/checkout/issues/692
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Check PR Limit
+        uses: lucaslim/pull-request-limiter-action@test
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          limit: 2
+          auto_close: false
+          message: |
+            You currently have too many opened Pull Requests. Please close this and reopen it once you have less than ${limit}.
+      
+            **For more information, please refer to our [Pull Request Guidelines](https://einc.atlassian.net/l/cp/d84EDpzo).**
+
+            **Or you could also...**
+            - Ask a repository administrator to bypass this check.
+            - See if any of your open Pull Requests can be improved.
+            - Ask reviewers to review your opened Pull Requests.
+            - Review Pull Requests from other developers.
+            - Improve our documentation.`,
