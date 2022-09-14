@@ -9,7 +9,6 @@ jobs:
   checks:
     name: Checks
     runs-on: ubuntu-latest
-    if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
     steps:
       # must keep this extra checkout step until this bug is fixed: https://github.com/actions/checkout/issues/692
       - name: Checkout repository
