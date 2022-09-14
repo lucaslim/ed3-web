@@ -5,7 +5,7 @@ on:
     paths-ignore:
       - README.md
   pull_request:
-    types: [opened, reopened, ready_for_review, synchronized]
+    types: [opened, reopened, ready_for_review, synchronize]
 
 jobs:
   checks:
