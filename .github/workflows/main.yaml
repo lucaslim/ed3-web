@@ -16,7 +16,7 @@ jobs:
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
         
       - name: Check PR Limit
-        uses: lucaslim/pull-request-limiter-action@main
+        uses: lucaslim/pull-request-limiter-action@test
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
