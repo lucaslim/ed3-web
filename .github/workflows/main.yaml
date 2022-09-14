@@ -37,10 +37,6 @@ jobs:
             - Ask reviewers to review your opened Pull Requests.
             - Review Pull Requests from other developers.
             - Improve our documentation.
-            
-      - name: '[SKIP] Not a pull request'
-        if: github.event.ref == 'refs/heads/master'
-        run: echo "No checks needed. Moving on..."
 
   test:
     runs-on: ubuntu-latest
