@@ -1,9 +1,9 @@
 on:
   push:
-#   workflow_run:
-#     workflows: [Checks]
-#     types:
-#       - completed
+  workflow_run:
+    workflows: [Checks]
+    types:
+      - completed
 
 jobs:
   print-thingz:
