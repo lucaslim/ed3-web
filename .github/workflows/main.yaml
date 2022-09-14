@@ -17,7 +17,7 @@ jobs:
       - name: Check PR Limit
         uses: lucaslim/pull-request-limiter-action@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           limit: 3
           auto_close: false
           body: |
