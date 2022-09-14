@@ -14,8 +14,11 @@ jobs:
       # must keep this extra checkout step until this bug is fixed: https://github.com/actions/checkout/issues/692
       - name: Checkout repository
         uses: actions/checkout@v3
+        if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
+        
       - name: Check PR Limit
         uses: lucaslim/pull-request-limiter-action@main
+        if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           limit: 3
@@ -31,6 +34,10 @@ jobs:
             - Ask reviewers to review your opened Pull Requests.
             - Review Pull Requests from other developers.
             - Improve our documentation.
+            
+      - name: '[SKIP] Not a pull request'
+        if: github.event.action != opened && github.event.action != reopened && github.event.action != ready_for_review
+        run: echo "No checks needed. Moving on..."
 
   test:
     runs-on: ubuntu-latest
