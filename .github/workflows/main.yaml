@@ -1,8 +1,4 @@
-on:
-  workflow_run:
-    workflows: [Checks]
-    types:
-      - completed
+on: [push]
 
 jobs:
   test:
