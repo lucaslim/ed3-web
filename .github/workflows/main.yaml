@@ -1,9 +1,11 @@
 on:
   push:
+    branches:
+      - master
     paths-ignore:
       - README.md
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    types: [opened, reopened, ready_for_review, synchronized]
 
 jobs:
   checks:
@@ -37,7 +39,7 @@ jobs:
             - Improve our documentation.
             
       - name: '[SKIP] Not a pull request'
-        if: github.event.action != 'opened' && github.event.action != 'reopened' && github.event.action != 'ready_for_review'
+        if: github.event.ref == 'refs/heads/master'
         run: echo "No checks needed. Moving on..."
 
   test:
