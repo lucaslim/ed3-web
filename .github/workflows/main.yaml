@@ -1,4 +1,6 @@
-on: [push, workflow_dispatch]
+on:
+  pull_request:
+    types: [opened, synchronized, reopened, ready_for_review]
 
 jobs:
   print-thingz:
