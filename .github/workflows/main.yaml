@@ -1,14 +1,9 @@
 on:
   push:
     branches:
-      - master
-    paths-ignore:
-      - README.md
-      - .github
+      - main
   pull_request:
     types: [opened, reopened, ready_for_review, synchronize]
-    paths-ignore:
-      - README.md
 
 jobs:
   checks:
