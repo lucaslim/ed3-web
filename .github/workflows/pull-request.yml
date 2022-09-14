@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           limit: 2
-          auto_close: false
+          auto_close: true
           message: |
             You currently have too many opened Pull Requests. Please close this and reopen it once you have less than ${limit}.
       
