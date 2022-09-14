@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Check PR Limit
-        uses: lucaslim/pull-request-limiter-action@main
+        uses: lucaslim/pull-request-limiter-action@test
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           limit: 2
