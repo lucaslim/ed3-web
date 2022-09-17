@@ -21,7 +21,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           limit: 3
-          auto_close: false
+          auto_close: true
           body: |
             Hola @${{ github.actor }}
           
