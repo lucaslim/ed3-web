@@ -43,13 +43,13 @@ jobs:
         id: cypress-test
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://circleci.com/api/v2/project/gh/${{ github.repository }}/pipeline'
+          url: 'https://circleci.com/api/v2/project/gh/carmigo/edealer-web-v2/pipeline'
           method: 'POST'
           customHeaders: >-
             {
               "x-attribution-login": "lucaslim",
               "x-attribution-actor-id": "lucaslim",
-              "Circle-Token": ""
+              "Circle-Token": ${{ secrets.CIRCLECI_TOKEN }}
             }
           data: >-
             {
