@@ -35,6 +35,38 @@ jobs:
             - Ask reviewers to review your opened Pull Requests.
             - Review Pull Requests from other developers.
             - Improve our documentation.
+            
+  circle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Cypress Tests
+        id: cypress-test
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://circleci.com/api/v2/project/gh/${{ github.repository }}/pipeline'
+          method: 'POST'
+          customHeaders: >-
+            {
+              "x-attribution-login": "lucaslim",
+              "x-attribution-actor-id": "lucaslim",
+              "Circle-Token": "" #"${{ secrets.CIRCLECI_TOKEN }}"
+            }
+          data: >-
+            {
+              "branch": "fix-dashboard-magic",
+              "parameters": {
+                "appEnv": "dev",
+                "baseUrl": "https://6326650f9eada32fdb0d864d--edealer-web-dev.netlify.app",
+                "event": "push",
+                "reason": "",
+                "runLocal": false
+              }
+            }
+      - name: Show Response
+        run: |
+          echo ${{ steps.cypress-test.outputs.response }}
+          echo ${{ steps.cypress-test.outputs.headers }}
+          echo ${{ fromJson(steps.cypress-test.outputs.response) }}
 
   test:
     runs-on: ubuntu-latest
