@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
-        
+
       - name: Check PR Limit
         uses: lucaslim/pull-request-limiter-action@main
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'ready_for_review'
@@ -24,7 +24,7 @@ jobs:
           auto_close: false
           body: |
             Hola @${{ github.actor }}
-          
+
             You currently have too many opened Pull Requests. Please close this and reopen it once you have less than 3.
 
             **For more information, please refer to our [Pull Request Checklist](https://einc.atlassian.net/l/cp/d84EDpzo).**
@@ -35,7 +35,7 @@ jobs:
             - Ask reviewers to review your opened Pull Requests.
             - Review Pull Requests from other developers.
             - Improve our documentation.
-            
+
   circle:
     runs-on: ubuntu-latest
     steps:
@@ -43,8 +43,8 @@ jobs:
         id: cypress-test
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://circleci.com/api/v2/project/gh/carmigo/edealer-web-v2/pipeline'
-          method: 'POST'
+          url: "https://circleci.com/api/v2/project/gh/carmigo/edealer-web-v2/pipeline"
+          method: "POST"
           customHeaders: >-
             {
               "x-attribution-login": "lucaslim",
@@ -67,44 +67,3 @@ jobs:
           echo ${{ steps.cypress-test.outputs.response }}
           echo ${{ steps.cypress-test.outputs.headers }}
           echo ${{ fromJson(steps.cypress-test.outputs.response) }}
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}.
-  print-thingz:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-    - uses: actions/github-script@v6
-      env:
-        HELLO: WORLD
-      with:
-        script: |
-          console.log(process.env);
-          console.log("i'm being triggered!")
-    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-    - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-    - name: Check out repository code
-      uses: actions/checkout@v2
-    - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-    - name: List files in the repository
-      run: |
-        ls ${{ github.workspace }}
-    - run: echo "🍏 This job's status is ${{ job.status }}.
