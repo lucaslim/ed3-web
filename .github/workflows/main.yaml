@@ -49,7 +49,7 @@ jobs:
             {
               "x-attribution-login": "lucaslim",
               "x-attribution-actor-id": "lucaslim",
-              "Circle-Token": "" #"${{ secrets.CIRCLECI_TOKEN }}"
+              "Circle-Token": ""
             }
           data: >-
             {
