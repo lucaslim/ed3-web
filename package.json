@@ -1,0 +1,26 @@
+{
+  "name": "ed3-web",
+  "version": "1.0.0",
+  "description": "yolo again",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucaslim/ed3-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucaslim/ed3-web/issues"
+  },
+  "homepage": "https://github.com/lucaslim/ed3-web#readme",
+  "dependencies": {
+    "graphql-inspector": "^0.5.1"
+  },
+  "devDependencies": {
+    "@graphql-inspector/ci": "^3.4.0",
+    "graphql": "^16.6.0"
+  }
+}
