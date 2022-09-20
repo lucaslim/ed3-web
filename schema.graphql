@@ -37,7 +37,6 @@ type Chat implements Node {
 
 type ChatMessage implements Node {
   id: ID!
-  content: String!
   time: Date!
   user: User!
 }
