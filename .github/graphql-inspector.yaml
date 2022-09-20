@@ -1,2 +1,5 @@
 branch: main
 schema: schema.graphql
+
+diff:
+  failOnBreaking: false
