@@ -1,6 +1,7 @@
 name: GraphQL Schema Update
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       app_env:
