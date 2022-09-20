@@ -6,7 +6,7 @@ schema {
 
 type Query {
   me: User!
-  user(id: ID!): User
+  user: User
   allUsers: [User]
   search(term: String!): [SearchResult!]!
   myChats: [Chat!]!
