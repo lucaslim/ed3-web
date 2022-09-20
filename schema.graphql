@@ -25,7 +25,6 @@ union SearchResult = User | Chat | ChatMessage
 
 type User implements Node {
   id: ID!
-  username: String!
   role: Role!
 }
 
