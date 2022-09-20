@@ -27,7 +27,7 @@ jobs:
         uses: kamilkisiela/graphql-inspector@v3.4.0
         with:
           schema: "main:schema.graphql"
-          fail-on-breaking: false
+          fail-on-breaking: true
 
  #  update-graphql-schema:
 #     name: Update GraphQL Schema
