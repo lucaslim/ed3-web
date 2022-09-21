@@ -46,19 +46,19 @@ jobs:
             console.log("i'm being triggered!")
 
       - name: Create/Update Pull Request for GraphQL SDL
-        uses: carmigo/edealer-web-v2/.github/actions/create-schema-pull-request@hotfix/action-install
+        uses: ./.github/actions/create-schema-pull-request
         with:
           path: "src/store/apollo/schema.graphql"
           commit-message: "[hotfix] update schema definition language 🩻"
 
       - name: Create/Update Pull Request for Possible Types
-        uses: carmigo/edealer-web-v2/.github/actions/create-schema-pull-request@hotfix/action-install
+        uses: ./.github/actions/create-schema-pull-request
         with:
           path: "src/store/apollo/possibleTypes/introspectionResults.ts"
           commit-message: "[hotfix] update possible types 🔮"
 
       - name: Create/Update Pull Request for GraphQL Schema & Operation types
-        uses: carmigo/edealer-web-v2/.github/actions/create-schema-pull-request@hotfix/action-install
+        uses: ./.github/actions/create-schema-pull-request
         with:
           path: "src/store/api/graph/interfaces/types.ts"
           commit-message: "[hotfix] update graphql schema/operation types ⛓"
