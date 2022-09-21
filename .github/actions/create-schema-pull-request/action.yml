@@ -23,10 +23,12 @@ runs:
   steps:
     - name: Get Current Date
       id: date
+      shell: bash
       run: echo "::set-output name=date::$(date +'%B %d, %Y')"
 
     - name: Create Pull Request
       uses: gr2m/create-or-update-pull-request-action@v1.x
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       with:
