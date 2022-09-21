@@ -34,7 +34,9 @@ jobs:
 
       # - run: echo "hello world" > src/store/apollo/possibleTypes/introspectionResults.ts
 
-      - run: echo "hello world" > src/store/apollo/possibleTypes/should-not-commit.ts
+      # - run: echo "hello world" > src/store/apollo/possibleTypes/should-not-commit.ts
+
+      - run: echo "hello world" > src/store/apollo/possibleTypes/introspectionResults.ts
 
       - uses: actions/cache@v2
         with:
