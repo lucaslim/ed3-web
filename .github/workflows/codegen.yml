@@ -20,10 +20,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v2
         with:
           node-version: "14.17"
+
+      # - run: type > schema.graphql
+      - run: type > test.txt
+
+      - run: type > src/api/schema.graphql
 
       - uses: actions/cache@v2
         with:
@@ -43,7 +50,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
 
@@ -53,9 +60,9 @@ jobs:
           assignees: lucaslim
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: squash
-          branch: 'hotfix/schema-update'
-          path: 'schema.graphql'
-          commit-message: '[hotfix] schema.graphql change ${{ steps.date.outputs.date }} 🚀'
+          branch: "hotfix/schema-update"
+          path: "schema.graphql"
+          commit-message: "[hotfix] schema.graphql change ${{ steps.date.outputs.date }} 🚀"
           labels: category/internal
           update-pull-request-title-and-body: true
 
@@ -64,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
 
@@ -74,8 +81,8 @@ jobs:
           assignees: lucaslim
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: squash
-          branch: 'hotfix/schema-update'
-          path: 'src/api/schema.graphql'
-          commit-message: '[hotfix] src/api/schema.graphql change ${{ steps.date.outputs.date }} 🚀'
+          branch: "hotfix/schema-update"
+          path: "src/api/schema.graphql"
+          commit-message: "[hotfix] src/api/schema.graphql change ${{ steps.date.outputs.date }} 🚀"
           labels: category/internal
           update-pull-request-title-and-body: true
