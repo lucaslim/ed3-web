@@ -28,11 +28,11 @@ jobs:
           node-version: "14.17"
 
       # - run: type > schema.graphql
-      - run: type > test.txt
+      # - run: type > test.txt
 
-      - run: type > src/store/apollo/schema.graphql
+      # - run: type > src/store/apollo/schema.graphql
 
-      - run: type > src/store/apollo/possibleTypes/introspectionResults.ts
+      - run: hello > src/store/apollo/possibleTypes/introspectionResults.ts
 
       - uses: actions/cache@v2
         with:
