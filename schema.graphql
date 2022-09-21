@@ -19,6 +19,7 @@ enum Role {
 
 interface Node {
   id: ID!
+  pos: Int!
 }
 
 union SearchResult = User | Chat | ChatMessage
