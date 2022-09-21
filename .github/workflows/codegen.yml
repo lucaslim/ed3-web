@@ -30,6 +30,8 @@ jobs:
       # - run: type > schema.graphql
       - run: type > test.txt
 
+      - run: type > src/api/schema.graphql
+
       - uses: actions/cache@v2
         with:
           path: "**/node_modules"
