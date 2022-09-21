@@ -1,4 +1,5 @@
 type Query {
   root: Boolean
   test: String!
+  boot: String!
 }
