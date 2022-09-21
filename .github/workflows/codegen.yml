@@ -30,7 +30,7 @@ jobs:
       # - run: type > schema.graphql
       - run: type > test.txt
 
-      - run: type > src/store/apollo/schema.graphql
+      - run: type > ./src/store/apollo/schema.graphql
 
       - uses: actions/cache@v2
         with:
