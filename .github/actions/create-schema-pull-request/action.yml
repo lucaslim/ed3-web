@@ -28,7 +28,6 @@ runs:
 
     - name: Create Pull Request
       uses: gr2m/create-or-update-pull-request-action@v1.x
-      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       with:
