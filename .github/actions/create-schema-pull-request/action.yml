@@ -11,7 +11,11 @@ inputs:
   commit-message:
     description: Commit message for all uncommited changes.
     required: true
-    default: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+    default: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
+
+  token:
+    description: "Github Token"
+    required: true
 
 runs:
   using: composite
@@ -20,9 +24,9 @@ runs:
     - name: Create Pull Request
       uses: gr2m/create-or-update-pull-request-action@v1.x
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
       with:
-        title: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+        title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
         body: |
           ## GraphQL Schema Update 🚀
 
@@ -34,7 +38,7 @@ runs:
         assignees: tyllrb, mpeblock, lucaslim
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         auto-merge: squash
-        branch: 'hotfix/schema-update'
+        branch: "hotfix/schema-update"
         path: ${{ inputs.path }}
         commit-message: ${{ inputs.commit-message }}
         labels: category/internal
