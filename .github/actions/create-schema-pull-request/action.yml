@@ -11,7 +11,7 @@ inputs:
   commit-message:
     description: Commit message for all uncommited changes.
     required: true
-    default: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
+    default: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types 🚀"
 
   token:
     description: "Github Token"
