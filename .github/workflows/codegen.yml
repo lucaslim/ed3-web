@@ -46,21 +46,21 @@ jobs:
             console.log("i'm being triggered!")
 
       - name: Create/Update Pull Request for GraphQL SDL
-        uses: ./.github/actions/create-schema-pull-request
+        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
         with:
           path: "src/store/apollo/schema.graphql"
           commit-message: "[hotfix] update schema definition language 🩻"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create/Update Pull Request for Possible Types
-        uses: ./.github/actions/create-schema-pull-request
+        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
         with:
           path: "src/store/apollo/possibleTypes/introspectionResults.ts"
           commit-message: "[hotfix] update possible types 🔮"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create/Update Pull Request for GraphQL Schema & Operation types
-        uses: ./.github/actions/create-schema-pull-request
+        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
         with:
           path: "src/store/api/graph/interfaces/types.ts"
           commit-message: "[hotfix] update graphql schema/operation types ⛓"
