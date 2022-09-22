@@ -1,9 +1,6 @@
 name: Deploy to Stage
 
-on:
-  release:
-    types:
-      - published
+on: release
   
 jobs:
   create-release:
