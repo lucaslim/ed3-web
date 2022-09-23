@@ -74,10 +74,11 @@ jobs:
 
             [1]: https://github.com/carmigo/edealer-graphql
             [2]: https://einc.atlassian.net/l/cp/mtn1px4N
-          add-paths: |
-            src/store/apollo/schema.graphql
-            src/store/apollo/possibleTypes/introspectionResults.ts
-            src/store/api/graph/interfaces/types.ts
+          # add-paths: |
+          #   src/store/apollo/schema.graphql
+          #   src/store/apollo/possibleTypes/introspectionResults.ts
+          #   src/store/api/graph/interfaces/types.ts
+
           assignees: lucaslim
           branch: hotfix/schema-update
           commit-message: "[hotfix] update schema definition language 🩻"
