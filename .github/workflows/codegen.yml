@@ -83,6 +83,7 @@ jobs:
           base: refs/heads/main
           branch: hotfix/schema-update
           commit-message: "[hotfix] update schema definition language 🩻"
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           delete-branch: true
           labels: |
             category/internal 
