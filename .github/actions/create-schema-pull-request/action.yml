@@ -1,0 +1,50 @@
+name: Create Pull Request for schema and types update
+description: |
+  Action for creating pull request for schema and type updates, this is to ensure that we are creating/updating 
+  the PR with the same body and title even if it is a different commit
+
+inputs:
+  path:
+    description: Commit selected files only by providing a path. It is used in `git add "<path>"`
+    required: false
+
+  commit-message:
+    description: Commit message for all uncommited changes.
+    required: true
+    default: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types 🚀"
+
+  token:
+    description: "Github Token"
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Get Current Date
+      id: date
+      shell: bash
+      run: echo "::set-output name=date::$(date +'%B %d, %Y')"
+
+    - name: Create Pull Request
+      uses: gr2m/create-or-update-pull-request-action@v1.x
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      with:
+        title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
+        body: |
+          ## GraphQL Schema Update 🚀
+
+          🔎  **Found new changes in [EDealer's](https://github.com/carmigo/edealer-graphql) GraphQL Schema.**
+
+          Please verify before merging. If there are breaking changes to address, create a separate branched PR. Avoid coupling any code changes with the schema updates if possible.
+
+          **For more information, please refer to our [Handling API Updates Guidelines](https://einc.atlassian.net/l/cp/mtn1px4N).**
+        assignees: tyllrb, mpeblock, lucaslim
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        auto-merge: squash
+        branch: "hotfix/schema-update"
+        path: ${{ inputs.path }}
+        commit-message: ${{ inputs.commit-message }}
+        labels: category/internal
+        update-pull-request-title-and-body: true
