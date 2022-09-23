@@ -65,18 +65,18 @@ jobs:
         with:
           path: "src/store/apollo/schema.graphql"
           commit-message: "[hotfix] update schema definition language 🩻"
-          token: ${{ steps.generate-token.outputs.token }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Create/Update Pull Request for Possible Types
         uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
         with:
           path: "src/store/apollo/possibleTypes/introspectionResults.ts"
           commit-message: "[hotfix] update possible types 🔮"
-          token: ${{ steps.generate-token.outputs.token }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Create/Update Pull Request for GraphQL Schema & Operation types
         uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
         with:
           path: "src/store/api/graph/interfaces/types.ts"
           commit-message: "[hotfix] update graphql schema/operation types ⛓"
-          token: ${{ steps.generate-token.outputs.token }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
