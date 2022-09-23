@@ -61,7 +61,7 @@ jobs:
       - name: Create/Update Pull Request for GraphQL SDL
         uses: peter-evans/create-pull-request@v4.1.2
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: ${{ steps.generate-token.outputs.token }}
           title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
