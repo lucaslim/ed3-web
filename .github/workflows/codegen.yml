@@ -80,7 +80,7 @@ jobs:
             src/store/api/graph/interfaces/types.ts
 
           assignees: lucaslim
-          base: refs/heads/master
+          base: refs/heads/main
           branch: hotfix/schema-update
           commit-message: "[hotfix] update schema definition language 🩻"
           delete-branch: true
