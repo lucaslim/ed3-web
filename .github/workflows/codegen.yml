@@ -61,22 +61,44 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create/Update Pull Request for GraphQL SDL
-        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
+        uses: peter-evans/create-pull-request@v4.1.2
         with:
-          path: "src/store/apollo/schema.graphql"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
+          body: |
+            ## GraphQL Schema Update 🚀
+
+            🔎  **Found new changes in [EDealer's][1] GraphQL Schema.**
+
+            Please verify before merging. If there are breaking changes to address, create a separate branched PR. Avoid coupling any code changes with the schema updates if possible.
+
+            **For more information, please refer to our [Handling API Updates Guidelines][2].**
+
+            [1]: https://github.com/carmigo/edealer-graphql
+            [2]: https://einc.atlassian.net/l/cp/mtn1px4N
+          add-paths: |
+            src/store/apollo/schema.graphql
+            src/store/apollo/possibleTypes/introspectionResults.ts
+            src/store/api/graph/interfaces/types.ts
+          assignees: lucaslim
+          branch: hotfix/schema-update
           commit-message: "[hotfix] update schema definition language 🩻"
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          delete-branch: true
+          labels: |
+            category/internal 
+            automation
+          reviewers: lucaslim
 
-      - name: Create/Update Pull Request for Possible Types
-        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
-        with:
-          path: "src/store/apollo/possibleTypes/introspectionResults.ts"
-          commit-message: "[hotfix] update possible types 🔮"
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      # - name: Create/Update Pull Request for Possible Types
+      #   uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
+      #   with:
+      #     path: "src/store/apollo/possibleTypes/introspectionResults.ts"
+      #     commit-message: "[hotfix] update possible types 🔮"
+      #     token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      - name: Create/Update Pull Request for GraphQL Schema & Operation types
-        uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
-        with:
-          path: "src/store/api/graph/interfaces/types.ts"
-          commit-message: "[hotfix] update graphql schema/operation types ⛓"
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      # - name: Create/Update Pull Request for GraphQL Schema & Operation types
+      #   uses: lucaslim/ed3-web/.github/actions/create-schema-pull-request@lucaslim-patch-16
+      #   with:
+      #     path: "src/store/api/graph/interfaces/types.ts"
+      #     commit-message: "[hotfix] update graphql schema/operation types ⛓"
+      #     token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
