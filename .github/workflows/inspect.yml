@@ -1,9 +1,6 @@
 name: GraphQL Inspector
 
-on:
-  push:
-  pull_request:
-    types: [unlabeled, labeled]
+on: [push]
 
 jobs:
   test:
