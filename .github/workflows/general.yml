@@ -6,9 +6,6 @@ jobs:
   context:
     runs-on: ubuntu-latest
     steps:
-      - name: This was just created
-        if: ${{ github.created == 'true }}
-        run: echo "This was just created"
       - name: Context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
