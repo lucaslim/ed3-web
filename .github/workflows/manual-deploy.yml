@@ -35,11 +35,10 @@ jobs:
         id: matrix-paths
         run: |
           MATRIX_PATHS='
-              {"foo": "foo-1", "bar": "bar-1"},
-              {"foo": "foo-1", "bar": "bar-2"},
-              {"foo": "foo-2", "bar": "bar-1"},
+              "https://ed3.edealer.ca",
+              "https://beta.getedealer.com"
           '
-          echo ::set-output name=matrix-combinations::{\"include\":[$MATRIX_PATHS]}
+          echo ::set-output name=matrix-combinations::{\"paths\":[$MATRIX_PATHS]}
     outputs:
       matrix-combinations: ${{ steps.matrix-paths.outputs.matrix-combinations }}
 
@@ -50,5 +49,4 @@ jobs:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix-combinations) }}
     steps:
       - run: |
-          echo foo=${{ matrix.foo }}
-          echo bar=${{ matrix.bar }}
+          echo foo=${{ matrix.paths }}
