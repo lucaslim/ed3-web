@@ -62,11 +62,11 @@ jobs:
           script: |
             const { REACT_APP_SERVICES_ENV } = process.env;
             if(REACT_APP_SERVICES_ENV === 'stage') {
-              return { paths: ['https://stage.getedealer.com']}
+              return JSON.stringify({ paths: ['https://stage.getedealer.com']});
             }
 
             if(REACT_APP_SERVICES_ENV === 'prod') {
-              return { paths: ['https://ed3.edealer.ca', 'https://beta.getedealer.com']}
+              return JSON.stringify({ paths: ['https://ed3.edealer.ca', 'https://beta.getedealer.com']});
             }
           result-encoding: string
       - run: echo "${{ steps.sourcemap-paths.outputs.result }}"
