@@ -25,22 +25,28 @@ jobs:
     needs: [context]
     steps:
       - name: Set Sourcemap Paths
+        uses: actions/github-script@v6.3.0
         id: sourcemap-paths
-        if: github.event.inputs.env == 'stage'
-        run: echo ::set-output name=sourcemap-paths::{\"paths\":["https://stage.getedealer.com"]}
-      - name: Set Sourcemap Paths
-        id: sourcemap-paths
-        if: github.event.inputs.env == 'prod'
-        run: echo ::set-output name=sourcemap-paths::{\"paths\":["https://ed3.edealer.ca","https://beta.getedealer.com"]}
+        with:
+          script: |
+            const { REACT_APP_SERVICES_ENV } = process.env;
+            if(REACT_APP_SERVICES_ENV === 'stage') {
+              return ['https://stage.getedealer.com']
+            }
+
+            if(REACT_APP_SERVICES_ENV === 'prod') {
+              return ['https://ed3.edealer.ca', 'https://beta.getedealer.com']
+            }
+          result-encoding: string
     outputs:
-      sourcemap-paths: ${{ steps.steps.sourcemap-paths.outputs.sourcemap-paths }}
+      sourcemap-paths: ${{ steps.sourcemap-paths.outputs.result }}
 
   upload-sourcemap:
     runs-on: ubuntu-latest
     needs: [prep-matrix]
-    if: ${{ always() && needs.stage.result == 'success' || needs.prod.result == 'success' }}
+    # if: ${{ always() && needs.stage.result == 'success' || needs.prod.result == 'success' }}
     strategy:
-      matrix: ${{ fromJson(needs.steps.sourcemap-paths.outputs.sourcemap-paths) }}
+      matrix: ${{ fromJson(needs.prep-matrix.outputs.sourcemap-paths) }}
     steps:
       - run: |
           echo foo=${{ matrix.paths }}
