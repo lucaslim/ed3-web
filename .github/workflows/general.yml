@@ -1,6 +1,9 @@
 name: Context
 
-on: [pull_request, push, release, deployment]
+on:
+  release:
+    types:
+      - released
 
 jobs:
   context:
