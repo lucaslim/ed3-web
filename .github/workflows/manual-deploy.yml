@@ -20,13 +20,38 @@ env:
   REACT_APP_SERVICES_ENV: ${{ github.event.inputs.env }}
 
 jobs:
+  prep-matrix:
+    runs-on: ubuntu-latest
+    needs: [context]
+    steps:
+      - name: Set Sourcemap Paths
+        id: sourcemap-paths
+        if: github.event.inputs.env == 'stage'
+        run: echo ::set-output name=sourcemap-paths::{\"paths\":["https://stage.getedealer.com"]}
+      - name: Set Sourcemap Paths
+        id: sourcemap-paths
+        if: github.event.inputs.env == 'prod'
+        run: echo ::set-output name=sourcemap-paths::{\"paths\":["https://ed3.edealer.ca","https://beta.getedealer.com"]}
+    outputs:
+      sourcemap-paths: ${{ steps.steps.sourcemap-paths.outputs.sourcemap-paths }}
+
+  upload-sourcemap:
+    runs-on: ubuntu-latest
+    needs: [prep-matrix]
+    if: ${{ always() && needs.stage.result == 'success' || needs.prod.result == 'success' }}
+    strategy:
+      matrix: ${{ fromJson(needs.steps.sourcemap-paths.outputs.sourcemap-paths) }}
+    steps:
+      - run: |
+          echo foo=${{ matrix.paths }}
+
   context:
     runs-on: ubuntu-latest
     needs: setup-matrix
     steps:
       - run: echo "${{ github.event.inputs.reason }}"
       - run: echo $REACT_APP_SERVICES_ENV
-      - run: echo "${{ needs.setup-matrix.outputs.matrix-combinations }}"
+      - run: echo "${{ needs.setup-matrix.outputs.matrix-paths }}"
 
   setup-matrix:
     runs-on: ubuntu-latest
@@ -38,15 +63,15 @@ jobs:
               "https://ed3.edealer.ca",
               "https://beta.getedealer.com"
           '
-          echo ::set-output name=matrix-combinations::{\"paths\":[$MATRIX_PATHS]}
+          echo ::set-output name=matrix-paths::{\"paths\":[$MATRIX_PATHS]}
     outputs:
-      matrix-combinations: ${{ steps.matrix-paths.outputs.matrix-combinations }}
+      matrix-paths: ${{ steps.matrix-paths.outputs.matrix-paths }}
 
   matrix-job:
     runs-on: ubuntu-latest
     needs: setup-matrix
     strategy:
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix-combinations) }}
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix-paths) }}
     steps:
       - run: |
           echo foo=${{ matrix.paths }}
