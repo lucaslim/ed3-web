@@ -1,9 +1,6 @@
 name: Context
 
-on:
-  release:
-    types:
-      - released
+on: [release]
 
 jobs:
   context:
