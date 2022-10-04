@@ -96,6 +96,7 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         id: pr-title
+        continue-on-error: true
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -108,7 +109,6 @@ jobs:
       - if: ${{ steps.pr-title.conclusion == 'failure' }}
         uses: peter-evans/find-comment@v2
         id: fc
-        continue-on-error: true
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
@@ -116,7 +116,6 @@ jobs:
 
       - if: ${{ steps.pr-title.conclusion == 'failure' }}
         uses: peter-evans/create-or-update-comment@v2
-        continue-on-error: true
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
