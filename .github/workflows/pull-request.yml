@@ -89,6 +89,9 @@ jobs:
   ensure-pr-title:
     name: Ensure ticket number is in title
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     if: |
       github.event.action == 'opened' || 
       github.event.action == 'reopened' || 
@@ -123,7 +126,7 @@ jobs:
           body: |
             Hello @${{ github.actor }}
 
-            The pull request title does match the current guideline: `[Ticket Number] Section/Component - Descriptive title`.
+            The pull request title does match the current guideline: `[Ticket Number] Section/Component - Descriptive title`
 
             **For more information, please refer to our [Pull Request Naming Guidelines][1].**
 
