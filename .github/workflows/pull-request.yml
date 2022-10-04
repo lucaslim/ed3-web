@@ -96,6 +96,7 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         id: pr-title
+        continue-on-error: true
         with:
           script: |
             const title = context.payload.pull_request.title;
