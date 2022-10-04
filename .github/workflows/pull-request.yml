@@ -106,7 +106,7 @@ jobs:
             const regex = RegExp(/^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$/);
 
             if (!regex.test(title)) {
-              core.setFailed('Pull Request title "${title}" failed to pass match regex - ${regex}`')
+              core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`)
             }
 
       # - if: ${{ steps.pr-title.outcome == 'failure' }}
