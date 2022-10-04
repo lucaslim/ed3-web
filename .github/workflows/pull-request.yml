@@ -114,7 +114,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
-          body-includes: The pull request title does not match the format we are looking for
+          body-includes: The pull request title does match the current guideline
           direction: last
 
       - if: ${{ always() }}
