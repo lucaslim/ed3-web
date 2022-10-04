@@ -94,24 +94,36 @@ jobs:
       github.event.action == 'reopened' || 
       github.event.action == 'edited'
     steps:
-      - run: "echo ${{ github.event.pull_request.title }}"
       - uses: actions/github-script@v6
+        id: pr-title
         with:
           script: |
             const title = context.payload.pull_request.title;
             const regex = RegExp(/^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$/);
 
             if (!regex.test(title)) {
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `Hello @${{ github.actor }}
+              core.setFailed('Pull Request title "${title}" failed to pass match regex - ${regex}`')
+            }
+
+      - if: ${{ steps.pr-title.conclusion === 'failure' }}
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: The pull request title does not match the format we are looking for
+
+      - if: ${{ steps.pr-title.conclusion === 'failure' }}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Hello @${{ github.actor }}
 
             The pull request title does not match the format we are looking for \`[Ticket Number] Section/Component - Descriptive title\`.
 
             **For more information, please refer to our [Pull Request Naming Guidelines][1].**
 
             [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming`
-              });
-            }
+          edit-mode: replace
