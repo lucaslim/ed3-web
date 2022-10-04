@@ -109,7 +109,7 @@ jobs:
             }
 
       - if: ${{ always() }}
-        uses: peter-evans/find-comment@v2
+        uses: lucaslim/find-comment@main
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -118,7 +118,9 @@ jobs:
           direction: last
 
       - if: ${{ always() }}
-        run: echo ${{ steps.fc.outputs.comment-id }}
+        run: |
+          echo ${{ steps.fc.outputs.comment-id }}
+          echo ${{ steps.fc.outputs.comment-node-id }}
 
       - if: ${{ failure() }}
         uses: peter-evans/create-or-update-comment@v2
@@ -136,8 +138,6 @@ jobs:
           edit-mode: replace
 
       - if: ${{ success() }}
-        env:
-          COMMENT_ID: ${{ steps.fc.outputs.comment-id }}
         uses: actions/github-script@v6
         with:
           script: |
@@ -148,5 +148,5 @@ jobs:
                   }
               }`;
 
-            const variables = { id: process.env.COMMENT_ID };
+            const variables = { id: '${{ steps.fc.outputs.comment-node-id }}' };
             await github.graphql(mutation, variables);
