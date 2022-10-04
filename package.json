@@ -6,11 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lucaslim/ed3-web.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/lucaslim/ed3-web.git",
+  "author": "Lucas L. <lucas.lim@eblock.ca>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lucaslim/ed3-web/issues"
@@ -21,6 +18,7 @@
   },
   "devDependencies": {
     "@graphql-inspector/ci": "^3.4.0",
+    "axios": "0.27.2",
     "graphql": "^16.6.0"
   }
 }
