@@ -84,6 +84,8 @@ jobs:
   #           Ready to Merge=@joelray @jns0987654321
   #           High Priority=@jns0987654321 @tyllrb @mpeblock @lucaslim
 
+  #Pull Request title "${title}" failed to pass match regex - ${regex}
+
   ensure-pr-title:
     name: Ensure ticket number is in title
     runs-on: ubuntu-latest
@@ -93,7 +95,24 @@ jobs:
       github.event.action == 'edited'
     steps:
       - run: "echo ${{ github.event.pull_request.title }}"
-      - uses: deepakputhraya/action-pr-title@master
+      - uses: actions/github-script@v6
         with:
-          regex: ^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = context.payload.pull_request.title;
+            const regex = RegExp(/^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$/);
+
+            if (!regex.test(title)) {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: |
+                  Hello @${{ github.actor }}
+
+                  The pull request title does not match the format we are looking for `[Ticket Number] Section/Component - Descriptive title`.
+
+                  **For more information, please refer to our [Pull Request Naming Guidelines][1].**
+
+                  [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming
+              });
+            }
