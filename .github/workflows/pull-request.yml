@@ -92,7 +92,7 @@ jobs:
       github.event.action == 'reopened' || 
       github.event.action == 'edited'
     steps:
-      - run: "echo ${{ github.event.title }}"
+      - run: "echo ${{ github.event.pull_request.title }}"
       - uses: deepakputhraya/action-pr-title@master
         with:
           regex: ^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$
