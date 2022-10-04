@@ -105,12 +105,9 @@ jobs:
             if (!regex.test(title)) {
               core.setFailed('Pull Request title "${title}" failed to pass match regex - ${regex}`')
             }
-      - run: |
-          echo ${{ steps.pr-title.conclusion }}
-          echo ${{ steps.pr-title.outcome }}
 
       # - if: ${{ steps.pr-title.outcome == 'failure' }}
-      - if: ${{ failure() }}
+      - if: ${{ always() }}
         uses: peter-evans/find-comment@v2
         id: fc
         with:
@@ -118,7 +115,7 @@ jobs:
           comment-author: "github-actions[bot]"
           body-includes: The pull request title does not match the format we are looking for
 
-      - if: ${{ steps.pr-title.outcome == 'failure' }}
+      - if: ${{ failure() }}
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -132,3 +129,6 @@ jobs:
 
             [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming`
           edit-mode: replace
+
+      - if: ${{ success() }}
+        run: echo ${{ steps.fc.outputs.comment-id }}
