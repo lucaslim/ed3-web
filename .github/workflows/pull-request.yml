@@ -144,4 +144,5 @@ jobs:
                   }
               }`;
 
-            await github.graphql(mutation, { id: ${{ steps.fc.outputs.comment-id }} })
+            const variables = { id: '${{ steps.fc.outputs.comment-id }}' };
+            await github.graphql(mutation, variables);
