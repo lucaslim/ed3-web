@@ -139,7 +139,7 @@ jobs:
           script: |
             const mutation = `
               mutation minimizeComment($id: ID!) {
-                  minimizeComment(input: { classifier: OUTDATED, subjectId: $id }) {
+                  minimizeComment(input: { classifier: RESOLVED, subjectId: $id }) {
                       clientMutationId
                   }
               }`;
