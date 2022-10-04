@@ -105,6 +105,9 @@ jobs:
             if (!regex.test(title)) {
               core.setFailed('Pull Request title "${title}" failed to pass match regex - ${regex}`')
             }
+      - run: |
+          echo ${{ steps.pr-title.conclusion }}
+          echo ${{ steps.pr-title.outcome }}
 
       - if: ${{ steps.pr-title.conclusion == 'failure' }}
         uses: peter-evans/find-comment@v2
