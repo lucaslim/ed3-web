@@ -105,7 +105,7 @@ jobs:
               core.setFailed('Pull Request title "${title}" failed to pass match regex - ${regex}`')
             }
 
-      - if: ${{ steps.pr-title.conclusion === 'failure' }}
+      - if: ${{ steps.pr-title.conclusion == 'failure' }}
         uses: peter-evans/find-comment@v2
         id: fc
         with:
@@ -113,7 +113,7 @@ jobs:
           comment-author: "github-actions[bot]"
           body-includes: The pull request title does not match the format we are looking for
 
-      - if: ${{ steps.pr-title.conclusion === 'failure' }}
+      - if: ${{ steps.pr-title.conclusion == 'failure' }}
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
