@@ -96,7 +96,6 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         id: pr-title
-        continue-on-error: true
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -109,7 +108,7 @@ jobs:
           echo ${{ steps.pr-title.conclusion }}
           echo ${{ steps.pr-title.outcome }}
 
-      - if: ${{ steps.pr-title.conclusion == 'failure' }}
+      - if: ${{ steps.pr-title.outcome == 'failure' }}
         uses: peter-evans/find-comment@v2
         id: fc
         with:
@@ -117,7 +116,7 @@ jobs:
           comment-author: "github-actions[bot]"
           body-includes: The pull request title does not match the format we are looking for
 
-      - if: ${{ steps.pr-title.conclusion == 'failure' }}
+      - if: ${{ steps.pr-title.outcome == 'failure' }}
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
