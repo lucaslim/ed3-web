@@ -96,7 +96,7 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         id: pr-title
-        continue-on-error: true
+        # continue-on-error: true
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -109,7 +109,8 @@ jobs:
           echo ${{ steps.pr-title.conclusion }}
           echo ${{ steps.pr-title.outcome }}
 
-      - if: ${{ steps.pr-title.outcome == 'failure' }}
+      # - if: ${{ steps.pr-title.outcome == 'failure' }}
+      - if: ${{ failure() }}
         uses: peter-evans/find-comment@v2
         id: fc
         with:
