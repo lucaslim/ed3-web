@@ -134,4 +134,14 @@ jobs:
           edit-mode: replace
 
       - if: ${{ success() }}
-        run: echo ${{ steps.fc.outputs.comment-id }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const mutation = `
+              mutation minimizeComment($id: ID!) {
+                  minimizeComment(input: { classifier: OUTDATED, subjectId: $id }) {
+                      clientMutationId
+                  }
+              }`;
+
+            await github.graphql(mutation, { id: ${{ steps.fc.outputs.comment-id }} })
