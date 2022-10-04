@@ -106,13 +106,12 @@ jobs:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: |
-                  Hello @${{ github.actor }}
+                body: `Hello @${{ github.actor }}
 
-                  The pull request title does not match the format we are looking for `[Ticket Number] Section/Component - Descriptive title`.
+                  The pull request title does not match the format we are looking for \`[Ticket Number] Section/Component - Descriptive title\`.
 
                   **For more information, please refer to our [Pull Request Naming Guidelines][1].**
 
-                  [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming
+                  [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming`
               });
             }
