@@ -65,7 +65,7 @@ jobs:
             src/store/api/graph/interfaces/types.ts
           assignees: lucaslim
           # base: refs/heads/main
-          branch: hotfix/schema-update
+          # branch: hotfix/schema-update
           commit-message: "[hotfix] update schema definition language 🩻"
           committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           delete-branch: true
