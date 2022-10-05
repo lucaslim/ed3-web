@@ -1,17 +1,8 @@
 name: GraphQL Schema Update
 
 on:
+  push:
   workflow_dispatch:
-    inputs:
-      app_env:
-        type: choice
-        description: Environment you want to check against
-        required: false
-        default: stage
-        options:
-          - stage
-          - dev
-          - prod
 
 jobs:
   update-graphql-schema:
