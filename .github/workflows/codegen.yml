@@ -25,6 +25,16 @@ jobs:
         with:
           node-version: "14.17"
 
+      - run: type > test.txt
+
+      - run: type > src/store/apollo/schema.graphql
+
+      - run: echo "hello world" > src/store/apollo/possibleTypes/introspectionResults.ts
+
+      - run: echo "hello world" > src/store/apollo/possibleTypes/should-not-commit.ts
+
+      - run: echo "hello world2" > src/store/api/graph/interfaces/types.ts
+
       - uses: actions/cache@v2
         with:
           path: "**/node_modules"
@@ -43,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
 
@@ -53,9 +63,9 @@ jobs:
           assignees: lucaslim
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: squash
-          branch: 'hotfix/schema-update'
-          path: 'schema.graphql'
-          commit-message: '[hotfix] schema.graphql change ${{ steps.date.outputs.date }} 🚀'
+          branch: "hotfix/schema-update"
+          path: "schema.graphql"
+          commit-message: "[hotfix] schema.graphql change ${{ steps.date.outputs.date }} 🚀"
           labels: category/internal
           update-pull-request-title-and-body: true
 
@@ -64,7 +74,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: '[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀'
+          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
 
@@ -74,8 +84,8 @@ jobs:
           assignees: lucaslim
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: squash
-          branch: 'hotfix/schema-update'
-          path: 'src/api/schema.graphql'
-          commit-message: '[hotfix] src/api/schema.graphql change ${{ steps.date.outputs.date }} 🚀'
+          branch: "hotfix/schema-update"
+          path: "src/api/schema.graphql"
+          commit-message: "[hotfix] src/api/schema.graphql change ${{ steps.date.outputs.date }} 🚀"
           labels: category/internal
           update-pull-request-title-and-body: true
