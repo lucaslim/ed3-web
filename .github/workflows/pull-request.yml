@@ -84,15 +84,69 @@ jobs:
   #           Ready to Merge=@joelray @jns0987654321
   #           High Priority=@jns0987654321 @tyllrb @mpeblock @lucaslim
 
+  #Pull Request title "${title}" failed to pass match regex - ${regex}
+
   ensure-pr-title:
-    name: Ensure ticket number is in title
+    name: Ensure PR title is the right format
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     if: |
       github.event.action == 'opened' || 
       github.event.action == 'reopened' || 
-      github.event.action == 'edited'
+      github.event.action == 'edited' && (
+        github.actor != 'renovate[bot]' ||
+        github.actor != 'renovate' ||
+        github.actor != 'github-actions[bot]'
+      )
     steps:
-      - uses: deepakputhraya/action-pr-title@master
+      - uses: actions/github-script@v6
+        id: pr-title
         with:
-          regex: ^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s.*$
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = context.payload.pull_request.title;
+            const regex = RegExp(/^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s\w.*$/);
+
+            if (!regex.test(title)) {
+              core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`)
+            }
+
+      - if: ${{ always() }}
+        uses: lucaslim/find-comment@main
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: The pull request title does match the current guideline
+          direction: last
+
+      - if: ${{ failure() }}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Hello @${{ github.actor }}
+
+            The pull request title does match the current guideline: `[Ticket Number] Section/Component - Descriptive title`
+
+            **For more information, please refer to our [Pull Request Naming Guidelines][1].**
+
+            [1]: https://einc.atlassian.net/wiki/spaces/ED/pages/936640525/Pull+Requests#Naming`
+          edit-mode: replace
+
+      - if: ${{ success() && steps.fc.outputs.comment-node-id != '' }}
+        continue-on-error: true
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const mutation = `
+              mutation minimizeComment($id: ID!) {
+                  minimizeComment(input: { classifier: RESOLVED, subjectId: $id }) {
+                      clientMutationId
+                  }
+              }`;
+
+            const variables = { id: '${{ steps.fc.outputs.comment-node-id }}' };
+            await github.graphql(mutation, variables);
