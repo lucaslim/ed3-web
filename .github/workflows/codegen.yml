@@ -19,7 +19,7 @@ jobs:
           node-version: "14.17"
 
       # - run: type > schema.graphql
-      - run: type > test.txt
+      # - run: type > test.txt
 
       - run: type > src/store/apollo/schema.graphql
 
