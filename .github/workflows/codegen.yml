@@ -29,12 +29,6 @@ jobs:
 
       - run: type > src/store/apollo/schema.graphql
 
-      - run: echo "hello world" > src/store/apollo/possibleTypes/introspectionResults.ts
-
-      - run: echo "hello world" > src/store/apollo/possibleTypes/should-not-commit.ts
-
-      - run: echo "hello world2" > src/store/api/graph/interfaces/types.ts
-
       - uses: actions/cache@v2
         with:
           path: "**/node_modules"
