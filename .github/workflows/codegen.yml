@@ -8,6 +8,9 @@ jobs:
   update-graphql-schema:
     name: Update GraphQL Schema
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
 
@@ -15,9 +18,14 @@ jobs:
         with:
           node-version: "14.17"
 
+      # - run: type > schema.graphql
       - run: type > test.txt
 
       - run: type > src/store/apollo/schema.graphql
+
+      # - run: echo "hello world" > src/store/apollo/possibleTypes/introspectionResults.ts
+
+      # - run: echo "hello world" > src/store/apollo/possibleTypes/should-not-commit.ts
 
       - run: echo "hello world2" > src/store/api/graph/interfaces/types.ts
 
@@ -33,45 +41,36 @@ jobs:
           script: |
             console.log(process.env);
             console.log("i'm being triggered!")
+      # - uses: tibdex/github-app-token@v1
+      #   id: generate-token
+      #   with:
+      #     app_id: ${{ secrets.APP_ID }}
+      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Create Pull Request
-        uses: gr2m/create-or-update-pull-request-action@v1.x
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create/Update Pull Request for GraphQL SDL
+        uses: peter-evans/create-pull-request@v4.1.2
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # token: ${{ steps.generate-token.outputs.token }}
           title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
-
-            🔎  **Found new changes in [EDealer's](https://github.com/carmigo/edealer-graphql) GraphQL Schema.**
-
+            🔎  **Found new changes in [EDealer's][1] GraphQL Schema.**
             Please verify before merging. If there are breaking changes to address, create a separate branched PR. Avoid coupling any code changes with the schema updates if possible.
+            **For more information, please refer to our [Handling API Updates Guidelines][2].**
+            [1]: https://github.com/carmigo/edealer-graphql
+            [2]: https://einc.atlassian.net/l/cp/mtn1px4N
+          add-paths: |
+            src/store/apollo/schema.graphql
+            src/store/apollo/possibleTypes/introspectionResults.ts
+            src/store/api/graph/interfaces/types.ts
           assignees: lucaslim
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          auto-merge: squash
-          branch: "hotfix/schema-update"
-          path: "schema.graphql"
-          commit-message: "[hotfix] schema.graphql change ${{ steps.date.outputs.date }} 🚀"
-          labels: category/internal
-          update-pull-request-title-and-body: true
-
-      - name: Create Pull Request
-        uses: gr2m/create-or-update-pull-request-action@v1.x
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
-          body: |
-            ## GraphQL Schema Update 🚀
-
-            🔎  **Found new changes in [EDealer's](https://github.com/carmigo/edealer-graphql) GraphQL Schema.**
-
-            Please verify before merging. If there are breaking changes to address, create a separate branched PR. Avoid coupling any code changes with the schema updates if possible.
-          assignees: lucaslim
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          auto-merge: squash
-          branch: "hotfix/schema-update"
-          path: "src/api/schema.graphql"
-          commit-message: "[hotfix] src/api/schema.graphql change ${{ steps.date.outputs.date }} 🚀"
-          labels: category/internal
-          update-pull-request-title-and-body: true
+          base: refs/heads/main
+          branch: hotfix/schema-update
+          commit-message: "[hotfix] update schema definition language 🩻"
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          delete-branch: true
+          labels: |
+            category/internal 
+            automation
+          reviewers: lucaslim
