@@ -1,11 +1,13 @@
 name: Context
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   context:
     runs-on: ubuntu-latest
     steps:
+      - name: "Test Permission"
+        run: echo "permission testing!"
       - name: Context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
