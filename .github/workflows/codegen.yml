@@ -41,17 +41,17 @@ jobs:
           script: |
             console.log(process.env);
             console.log("i'm being triggered!")
-      # - uses: tibdex/github-app-token@v1
-      #   id: generate-token
-      #   with:
-      #     app_id: ${{ secrets.APP_ID }}
-      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create/Update Pull Request for GraphQL SDL
         uses: peter-evans/create-pull-request@v4.1.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # token: ${{ steps.generate-token.outputs.token }}
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate-token.outputs.token }}
           title: "[hotfix] Dev API updates - GraphQL Schema update and Regenerated types ${{ steps.date.outputs.date }} 🚀"
           body: |
             ## GraphQL Schema Update 🚀
