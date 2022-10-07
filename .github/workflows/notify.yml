@@ -8,10 +8,24 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
     steps:
-      - name: slack-send
-        uses: slackapi/slack-github-action@v1.22.0
-        with:
-          payload: |
-            {
-              "tag-name": "7.8.0"
-            }
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: EDealer Release
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
+          MSG_MINIMAL: true
+          SLACK_TITLE: " "
+          SLACK_MESSAGE: |
+            <!channel>
+
+            :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine: 
+
+            <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+      # - name: slack-send
+      #   uses: slackapi/slack-github-action@v1.22.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "tag-name": "7.8.0"
+      #       }
