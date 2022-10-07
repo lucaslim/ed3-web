@@ -1,0 +1,17 @@
+name: Test Slack Notification
+
+on: push
+
+jobs:
+  test-notify:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+    steps:
+      - name: slack-send
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          payload: |
+            {
+              "tag-name": "7.8.0"
+            }
