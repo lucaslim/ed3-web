@@ -5,15 +5,15 @@ on: push
 jobs:
   test-notify:
     runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-      SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+    # env:
+    #   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+    #   SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
     steps:
       - name: Run Unit and End-to-End
         id: cypress-test
         uses: fjogeleit/http-request-action@v1
         with:
-          url: "https://circleci.com/api/v2/project/gh/${{ github.repository }}/pipeline"
+          url: "https://circleci.com/api/v2/project/gh/carmigo/edealer-web-v2/pipeline"
           method: "POST"
           customHeaders: >-
             {
