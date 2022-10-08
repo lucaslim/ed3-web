@@ -9,80 +9,107 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
       SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
     steps:
-      # - name: Slack Notification
-      #   uses: rtCamp/action-slack-notify@v2
-      #   env:
-      #     SLACK_USERNAME: EDealer Release
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #     SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
-      #     MSG_MINIMAL: true
-      #     SLACK_TITLE: " "
-      #     SLACK_MESSAGE: |
-      #       <!channel>
-
-      #       :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
-
-      #       <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
-      - name: slack-send
-        uses: slackapi/slack-github-action@v1.22.0
+      - name: Run Unit and End-to-End
+        id: cypress-test
+        uses: fjogeleit/http-request-action@v1
         with:
-          payload: |
+          url: "https://circleci.com/api/v2/project/gh/${{ github.repository }}/pipeline"
+          method: "POST"
+          customHeaders: >-
             {
-              "attachments": [
-                {
-                  "color": "#2eb886",
-                  "blocks": [
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "image",
-                          "image_url": "https://slack-imgs.com/?c=1&o1=wi128.he128.si&url=https%3A%2F%2Fgithub.com%2Flucaslim.png%3Fsize%3D128",
-                          "alt_text": "lucaslim"
-                        },
-                        {
-                          "type": "mrkdwn",
-                          "text": "*<https://www.github.com/lucaslim|lucaslim>*"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": "<!channel>"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": ":rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": " "
-                        }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": "<https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }} | See release notes>"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
+              "x-attribution-login": "${{ github.actor }}",
+              "x-attribution-actor-id": "${{ github.actor }}",
+              "Circle-Token": "${{ secrets.CIRCLECI_TOKEN }}"
             }
+          data: >-
+            {
+              "branch": "master",
+              "parameters": {
+                "appEnv": "dev",
+                "event": "${{ github.event_name }}",
+                "reason": "Manual"
+              }
+            }
+
+      - name: Show Response
+        run: |
+          echo ${{ steps.myRequest.outputs.response }}
+          echo ${{ steps.myRequest.outputs.headers }}
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: EDealer Release
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
+          MSG_MINIMAL: true
+          SLACK_TITLE: " "
+          SLACK_MESSAGE: |
+            <!channel>
+
+            :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+            <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+      # - name: slack-send
+      #   uses: slackapi/slack-github-action@v1.22.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "attachments": [
+      #           {
+      #             "color": "#2eb886",
+      #             "blocks": [
+      #               {
+      #                 "type": "context",
+      #                 "elements": [
+      #                   {
+      #                     "type": "image",
+      #                     "image_url": "https://slack-imgs.com/?c=1&o1=wi128.he128.si&url=https%3A%2F%2Fgithub.com%2Flucaslim.png%3Fsize%3D128",
+      #                     "alt_text": "lucaslim"
+      #                   },
+      #                   {
+      #                     "type": "mrkdwn",
+      #                     "text": "*<https://www.github.com/lucaslim|lucaslim>*"
+      #                   }
+      #                 ]
+      #               },
+      #               {
+      #                 "type": "context",
+      #                 "elements": [
+      #                   {
+      #                     "type": "mrkdwn",
+      #                     "text": "<!channel>"
+      #                   }
+      #                 ]
+      #               },
+      #               {
+      #                 "type": "context",
+      #                 "elements": [
+      #                   {
+      #                     "type": "mrkdwn",
+      #                     "text": ":rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:"
+      #                   }
+      #                 ]
+      #               },
+      #               {
+      #                 "type": "context",
+      #                 "elements": [
+      #                   {
+      #                     "type": "mrkdwn",
+      #                     "text": " "
+      #                   }
+      #                 ]
+      #               },
+      #               {
+      #                 "type": "context",
+      #                 "elements": [
+      #                   {
+      #                     "type": "mrkdwn",
+      #                     "text": "<https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }} | See release notes>"
+      #                   }
+      #                 ]
+      #               }
+      #             ]
+      #           }
+      #         ]
+      #       }
