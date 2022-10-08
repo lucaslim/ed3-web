@@ -25,7 +25,7 @@ jobs:
             {
               "branch": "master",
               "parameters": {
-                "appEnv": "dev",
+                "appEnv": "ci",
                 "event": "${{ github.event_name }}",
                 "reason": "Manual"
               }
