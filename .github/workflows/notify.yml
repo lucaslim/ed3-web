@@ -67,7 +67,7 @@ jobs:
               }, 5000);
             }
 
-            poll();
+            await poll();
 
             console.log(status);
 
