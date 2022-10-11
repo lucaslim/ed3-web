@@ -52,7 +52,7 @@ jobs:
         with:
           result-encoding: json
           script: |
-            const axios = await import("axios");
+            const axios = require("axios");
             const pWaitFor = await import("p-wait-for");
             const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
 
