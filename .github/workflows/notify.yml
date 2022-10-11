@@ -49,7 +49,7 @@ jobs:
           script: |
             const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
 
-            const poll = () => {
+            function poll() {
               return new Promise((resolve) => {
                 setTimeout(async () => {
                   const response = await github.request(
@@ -64,16 +64,18 @@ jobs:
                   );
 
                   const data = JSON.parse(response.data);
-                  if (data.items[0].status === "running") {
-                    poll();
+                  const status = data.items[0].status;
+                  if (status === "running") {
+                    return poll();
                   } else {
-                    console.log(data.items[0].status);
-                    resolve(data.items[0].status);
+                    console.log(status);
+                    return resolve(status);
                   }
                 }, 5000);
               });
-            };
+            }
 
+            console.log(poll);
             console.log('start polling');
             const status = await poll();
             console.log('done polling');
