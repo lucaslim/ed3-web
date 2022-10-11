@@ -65,12 +65,15 @@ jobs:
                   poll();
                 } else {
                   console.log(data.items[0].status);
-                  return data.items[0].status;
+                  status = data.items[0].status;
+                  return;
                 }
               }, 5000);
             }
 
-            poll();
+            await poll();
+
+            return status;
       - run: |
           echo "${{ steps.poll.outputs.result }}"
 
