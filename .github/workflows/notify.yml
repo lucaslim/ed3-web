@@ -47,7 +47,7 @@ jobs:
             const { PIPELINE_ID } = process.env;
             const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`, {
               headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
                 "x-attribution-login": "${{ github.actor }}",
                 "x-attribution-actor-id": "${{ github.actor }}",
                 "Circle-Token": "${{ secrets.CIRCLECI_TOKEN }}"
