@@ -74,12 +74,11 @@ jobs:
                 if (status === "running") {
                   return false;
                 } else {
-                  pWaitFor.resolveWith({
+                  return true && pWaitFor.resolveWith({
                     pipelineId: response.data.items[0].pipeline_id,
                     workflowId: response.data.items[0].id,
                     status: response.data.items[0].status,
                   });
-                  return true;
                 }
               },
               {
@@ -90,6 +89,7 @@ jobs:
               }
             );
 
+            console.log('>>>');
             console.log(circleResponse);
 
             return circleResponse;
