@@ -41,7 +41,7 @@ jobs:
     steps:
       - env:
           PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
-        uses: actions/github-scripts@v6
+        uses: actions/github-script@v6
         with:
           scripts: |
             const { PIPELINE_ID } = process.env;
