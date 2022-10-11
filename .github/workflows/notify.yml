@@ -64,6 +64,7 @@ jobs:
                 if(data.items[0].status === 'running') {
                   poll();
                 } else {
+                  console.log(data.items[0].status);
                   return data.items[0].status;
                 }
               }, 5000);
