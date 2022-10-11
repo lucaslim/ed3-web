@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install p-wait-for@5.0.0 axios@1.1.2
-      - id: poll
+      - id: check-status
         env:
           PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
           CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
@@ -83,16 +83,18 @@ jobs:
                 }
               },
               {
-                interval: 500,
+                interval: 2000,
                 timeout: {
                   milliseconds: 60000,
                 },
               }
             );
 
+            console.log(circleResponse);
+
             return circleResponse;
       - run: |
-          echo "${{ steps.poll.outputs.result }}"
+          echo "${{ steps.check-status.outputs.result }}"
 
   test-notify:
     runs-on: ubuntu-latest
