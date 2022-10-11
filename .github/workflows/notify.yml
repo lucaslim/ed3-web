@@ -6,7 +6,7 @@ jobs:
   test-e2e:
     runs-on: ubuntu-latest
     outputs:
-      pipelineId: "${{ toJSON(steps.cypress-test.outputs.response).id }}"
+      pipelineId: "${{ fromJSON(steps.cypress-test.outputs.response).id }}"
     steps:
       - name: Run Unit and End-to-End
         id: cypress-test
@@ -32,8 +32,8 @@ jobs:
 
       - name: Show Response
         run: |
-          echo '${{ toJSON(steps.cypress-test.outputs.response).id }}'
-          echo '${{ toJSON(steps.cypress-test.outputs.response) }}'
+          echo '${{ fromJSON(steps.cypress-test.outputs.response).id }}'
+          echo '${{ fromJSON(steps.cypress-test.outputs.response) }}'
 
   check-status:
     runs-on: ubuntu-latest
