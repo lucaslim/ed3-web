@@ -77,12 +77,13 @@ jobs:
 
             console.log(poll);
             console.log('start polling');
-            const status = await poll();
-            console.log('done polling');
+            console.log(await poll());
+            //const status = await poll();
+            //console.log('done polling');
 
-            console.log('>>', status);
+            //console.log('>>', status);
 
-            return status;
+            return 'canceled';
       - run: |
           echo "${{ steps.poll.outputs.result }}"
 
