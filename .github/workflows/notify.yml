@@ -109,10 +109,7 @@ jobs:
 
             :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
 
-            *End-to-End*
-            status: ${{ needs.check-status.outputs.circleStatus.status == 'success' && '✅' || '❌' }}
-            reason: ${{ needs.check-status.outputs.circleStatus.status }}
-            link: https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ needs.check-status.outputs.circleStatus.pipelineNumber }}
+            *End-to-End: ${{ fromJSON(needs.check-status.outputs.circleStatus).status == 'success' && '✅ All tests had passed' || '❌ Some test had failed' }} <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ fromJSON(needs.check-status.outputs.circleStatus).pipelineNumber }} | See pipeline>*
 
             <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
       # - name: slack-send
