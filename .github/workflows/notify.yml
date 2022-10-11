@@ -39,51 +39,57 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-e2e
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm install p-wait-for@5.0.0 axios@1.1.2
       - id: poll
         env:
           PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
           CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
         uses: actions/github-script@v6
         with:
-          result-encoding: string
+          result-encoding: json
           script: |
+            const axios = await import("axios");
+            const pWaitFor = await import("p-wait-for");
             const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
 
-            function poll() {
-              return new Promise((resolve) => {
-                setTimeout(async () => {
-                  const response = await github.request(
-                    `https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`,
-                    {
-                      headers: {
-                        "x-attribution-login": "lucaslim",
-                        "x-attribution-actor-id": "lucaslim",
-                        "Circle-Token": CIRCLECI_TOKEN,
-                      },
-                    }
-                  );
-
-                  const data = JSON.parse(response.data);
-                  const status = data.items[0].status;
-                  if (status === "running") {
-                    return poll();
-                  } else {
-                    console.log(status);
-                    return resolve(status);
+            const circleResponse = await pWaitFor(
+              async () => {
+                const response = await axios.get(
+                  `https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`,
+                  {
+                    headers: {
+                      "x-attribution-login": "lucaslim",
+                      "x-attribution-actor-id": "lucaslim",
+                      "Circle-Token": CIRCLECI_TOKEN,
+                    },
                   }
-                }, 5000);
-              });
-            }
+                );
 
-            console.log(poll);
-            console.log('start polling');
-            console.log(await poll());
-            //const status = await poll();
-            //console.log('done polling');
+                const status = response.data.items[0].status;
+                if (status === "running") {
+                  return false;
+                } else {
+                  pWaitFor.resolveWith({
+                    pipelineId: response.data.items[0].pipeline_id,
+                    workflowId: response.data.items[0].id,
+                    status: response.data.items[0].status,
+                  });
+                  return true;
+                }
+              },
+              {
+                interval: 500,
+                timeout: {
+                  milliseconds: 60000,
+                },
+              }
+            );
 
-            //console.log('>>', status);
-
-            return 'canceled';
+            return circleResponse;
       - run: |
           echo "${{ steps.poll.outputs.result }}"
 
