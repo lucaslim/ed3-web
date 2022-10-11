@@ -76,7 +76,7 @@ jobs:
 
             const staus = await poll();
 
-            console.log(status);
+            console.log('>>', status);
 
             return status;
       - run: |
