@@ -54,7 +54,8 @@ jobs:
               }
             });
 
-            console.log(respose)
+            console.log(response)
+            console.log(response.data)
 
   test-notify:
     runs-on: ubuntu-latest
