@@ -53,7 +53,7 @@ jobs:
           result-encoding: json
           script: |
             const axios = require("axios");
-            const pWaitFor = await import("${{ github.workspace }}/node_modules/p-wait-for");
+            const { default: pWaitFor } = await import("${{ github.workspace }}/node_modules/p-wait-for/index.js");
 
             const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
 
