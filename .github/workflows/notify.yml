@@ -48,30 +48,32 @@ jobs:
           script: |
             const { PIPELINE_ID } = process.env;
 
-            var status;
-
             const poll = () => {
-              setTimeout(async () => {
-                const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`, {
-                  headers: {
-                    "x-attribution-login": "${{ github.actor }}",
-                    "x-attribution-actor-id": "${{ github.actor }}",
-                    "Circle-Token": "${{ secrets.CIRCLECI_TOKEN }}"
+              return new Promise((resolve) => {
+                setTimeout(async () => {
+                  const response = await github.request(
+                    `https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`,
+                    {
+                      headers: {
+                        "x-attribution-login": "lucaslim",
+                        "x-attribution-actor-id": "lucaslim",
+                        "Circle-Token": "***",
+                      },
+                    }
+                  );
+
+                  const data = JSON.parse(response.data);
+                  if (data.items[0].status === "running") {
+                    poll();
+                  } else {
+                    console.log(data.items[0].status);
+                    resolve(data.items[0].status);
                   }
-                });
+                }, 5000);
+              });
+            };
 
-                const data = JSON.parse(response.data);
-                if(data.items[0].status === 'running') {
-                  poll();
-                } else {
-                  console.log(data.items[0].status);
-                  status = data.items[0].status;
-                  return;
-                }
-              }, 5000);
-            }
-
-            await poll();
+            const staus = await poll();
 
             console.log(status);
 
