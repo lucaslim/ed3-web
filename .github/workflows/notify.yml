@@ -73,6 +73,8 @@ jobs:
 
             await poll();
 
+            console.log(status);
+
             return status;
       - run: |
           echo "${{ steps.poll.outputs.result }}"
