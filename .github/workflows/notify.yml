@@ -33,7 +33,7 @@ jobs:
       - name: Show Response
         run: |
           echo '${{ toJSON(steps.cypress-test.outputs.response).id }}'
-          echo '${{ steps.cypress-test.outputs.response }}'
+          echo '${{ toJSON(steps.cypress-test.outputs.response) }}'
 
   check-status:
     runs-on: ubuntu-latest
