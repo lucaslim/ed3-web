@@ -74,7 +74,9 @@ jobs:
               });
             };
 
-            const staus = await poll();
+            console.log('start polling');
+            const status = await poll();
+            console.log('done polling');
 
             console.log('>>', status);
 
