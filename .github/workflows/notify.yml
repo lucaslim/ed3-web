@@ -39,13 +39,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-e2e
     steps:
-      - uses: actions/github-scripts@v6
-        env:
+      - env:
           PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
-        run: |
-          const { PIPELINE_ID } = process.env;
-          const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}`);
-          console.log(response)
+        uses: actions/github-scripts@v6
+        with:
+          scripts: |
+            const { PIPELINE_ID } = process.env;
+            const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}`);
+            console.log(response)
 
   test-notify:
     runs-on: ubuntu-latest
