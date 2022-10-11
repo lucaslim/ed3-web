@@ -46,16 +46,30 @@ jobs:
           script: |
             const { PIPELINE_ID } = process.env;
 
-            const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`, {
-              headers: {
-                "x-attribution-login": "${{ github.actor }}",
-                "x-attribution-actor-id": "${{ github.actor }}",
-                "Circle-Token": "${{ secrets.CIRCLECI_TOKEN }}"
-              }
-            });
+            var status;
 
-            const data = JSON.parse(response.data);
-            console.log(data.items[0].status)
+            const poll = () => {
+              setTimeout(async () => {
+                const response = await github.request(`https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`, {
+                  headers: {
+                    "x-attribution-login": "${{ github.actor }}",
+                    "x-attribution-actor-id": "${{ github.actor }}",
+                    "Circle-Token": "${{ secrets.CIRCLECI_TOKEN }}"
+                  }
+                });
+
+                const data = JSON.parse(response.data);
+                if(data.items[0].status === 'running') {
+                  poll();
+                } else {
+                  status = data.items[0].status;
+                }
+              }, 5000);
+            }
+
+            poll();
+
+            console.log(status);
 
   test-notify:
     runs-on: ubuntu-latest
