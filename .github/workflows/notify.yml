@@ -42,11 +42,12 @@ jobs:
       - id: poll
         env:
           PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
+          CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
         uses: actions/github-script@v6
         with:
           result-encoding: string
           script: |
-            const { PIPELINE_ID } = process.env;
+            const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
 
             const poll = () => {
               return new Promise((resolve) => {
@@ -57,7 +58,7 @@ jobs:
                       headers: {
                         "x-attribution-login": "lucaslim",
                         "x-attribution-actor-id": "lucaslim",
-                        "Circle-Token": "***",
+                        "Circle-Token": CIRCLECI_TOKEN,
                       },
                     }
                   );
