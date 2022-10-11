@@ -38,6 +38,8 @@ jobs:
   check-status:
     runs-on: ubuntu-latest
     needs: test-e2e
+    outputs:
+      circleStatus: ${{ steps.check-status.outputs.result }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -93,13 +95,12 @@ jobs:
             console.log(circleResponse);
 
             return circleResponse;
-      - run: |
-          echo "${{ steps.check-status.outputs.result }}"
 
   test-notify:
     runs-on: ubuntu-latest
     needs: check-status
     steps:
+      - run: echo "${{ needs.check-status.outputs.circleStatus }}"
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
