@@ -21,10 +21,16 @@ jobs:
           project: ED
           issuetype: Task
           summary: |
-            Build completed for ${{ github.repository }}
+            [WEB] Deploy X.X.X to Production
           description: |
-            Compare branch
-          # fields: '{"Components": "ED3 Build and Deployment", "Repository": "edealer-web-v2"}'
+            In order to deploy the web app to prod, we follow the process outlined [here|https://einc.atlassian.net/l/cp/mrU42BW5#Staging---stage].
+
+            This process is broken into subtasks to be completed among the squads and deployer.
+          fields: >-
+            {
+              "component": "ED3 Build and Deployment",
+              "repository": "edealer-web-v2"
+            }
 
       - name: Log created issue
         run: echo "Issue ${{ steps.create.outputs.issue }} was created"
