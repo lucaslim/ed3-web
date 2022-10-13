@@ -63,7 +63,7 @@ jobs:
           fields: >-
             {
               ${{ inputs.parentIssueNumber != '' && '"parent": { "key": "${{ inputs.parentIssueNumber }}" },' || '' }}
-              "assignee": { "id": "${{ inputs.assignees }}" },
+              "assignee": { "id": "${{ inputs.assignee }}" },
               "components": [{ "name": "${{ inputs.components }}" }],
               "customfield_10048": [{ "value": "edealer-web-2" }],
               "priority": { "id": "${{ inputs.priority }}" }
