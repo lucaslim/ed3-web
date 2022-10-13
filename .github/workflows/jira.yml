@@ -49,7 +49,7 @@ jobs:
     needs: [create-deployment-task]
     strategy:
       matrix:
-        users: [
+        task: [
             # Anthony
             { user: "6241d45af813eb00692829f7", squad: "Blue" },
             # Tyler
@@ -68,9 +68,9 @@ jobs:
         uses: atlassian/gajira-create@master
         with:
           project: ED
-          issuetype: "Sub-task"
+          issuetype: Sub-task
           summary: |
-            [WEB] ${{ matrix.squad }} Squad X.X.X release verification
+            [WEB] ${{ matrix.task.squad }} Squad X.X.X release verification
           description: |
             h2. Latest Dev api updates
 
@@ -98,9 +98,9 @@ jobs:
             [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
           fields: >-
             {
-              "assignee": { "id": "${{ matrix.user }}" },
+              "assignee": { "id": "${{ matrix.task.user }}" },
               "components": [{ "name": "ED3 Build and Deployment" }],
               "customfield_10048": [{ "value": "edealer-web-2" }],
-              "parent": "${{ needs.create-deployment-task.output.issueNumber }}"
+              "parent": "${{ needs.create-deployment-task.outputs.issueNumber }}"
               "priority": { "id": "2" }
             }
