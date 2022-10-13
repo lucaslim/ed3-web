@@ -18,7 +18,7 @@ jobs:
         id: create
         uses: atlassian/gajira-create@master
         with:
-          project: Retail (ED)
+          project: Retail
           issuetype: Task
           summary: |
             Build completed for ${{ github.repository }}
