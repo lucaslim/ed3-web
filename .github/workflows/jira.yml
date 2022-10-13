@@ -23,8 +23,8 @@ jobs:
         with:
           name: config
           path: |
-            ${{ github.workspace }}/.jira.d/*
-            ${{ github.workspace }}/jira/*
+            /home/runner/.jira.d/*
+            /home/runner/jira/*
           retention-days: 1
 
   create-deployment-task:
@@ -39,8 +39,8 @@ jobs:
         with:
           name: config
           path: |
-            ${{ github.workspace }}/.jira.d/*
-            ${{ github.workspace }}/jira/*
+            /home/runner/.jira.d/*
+            /home/runner/jira/*
 
       - name: Create
         id: create
