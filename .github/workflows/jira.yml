@@ -41,6 +41,9 @@ jobs:
           name: config
           path: config.tar
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Create
         id: create
         uses: atlassian/gajira-create@master
