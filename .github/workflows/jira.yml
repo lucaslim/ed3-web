@@ -74,33 +74,33 @@ jobs:
           description: |
             h2. Latest Dev api updates
 
-            * (post PR link for squad dev api updates corresponding to latest stage)
-            * Should always regenerate API updates the day new stage is released to ensure no missed updates.
+            # * (post PR link for squad dev api updates corresponding to latest stage)
+            # * Should always regenerate API updates the day new stage is released to ensure no missed updates.
 
-            h2. LD flags on prod env are properly set e.g. for new/partial features etc
+            # h2. LD flags on prod env are properly set e.g. for new/partial features etc
 
-            * (what FFs were verified?)
+            # * (what FFs were verified?)
 
-            h2. QA of bugs/features on stage env
+            # h2. QA of bugs/features on stage env
 
-            * (summary of what was tested by squad)
+            # * (summary of what was tested by squad)
 
-            h2. All automated tests pass
+            # h2. All automated tests pass
 
-            * (post link to cypress run here)
+            # * (post link to cypress run here)
 
 
 
-            ----
+            # ----
 
-            h3. Reference:
+            # h3. Reference:
 
-            [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+            # [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
           fields: >-
             {
               "assignee": { "id": "${{ matrix.task.user }}" },
               "components": [{ "name": "ED3 Build and Deployment" }],
               "customfield_10048": [{ "value": "edealer-web-2" }],
-              "parent": "${{ needs.create-deployment-task.outputs.issueNumber }}"
+              "parent": { "key": "${{ needs.create-deployment-task.outputs.issueNumber }}" },
               "priority": { "id": "2" }
             }
