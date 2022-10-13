@@ -31,9 +31,7 @@ jobs:
               "assignee": { "id": "62e923b550bd9783f62ac424" },
               "components": [{ "name": "ED3 Build and Deployment" }],
               "customfield_10048": [{ "value": "edealer-web-2" }],
-              "priority": {
-                "id": "2",               
-              }
+              "priority": { "id": "2" }
             }
 
       - name: Log created issue
