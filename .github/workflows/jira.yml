@@ -11,7 +11,7 @@ jobs:
         uses: atlassian/gajira-login@master
         env:
           JIRA_BASE_URL: https://einc.atlassian.net
-          JIRA_USER_EMAIL: github-action[bot]@users.noreply.github.com
+          JIRA_USER_EMAIL: lucas.lim@eblock.ca
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
       - name: Create
