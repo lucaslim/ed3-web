@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   create-deployment-task:
-    name: Create Deployment Ticket
+    name: Deployment Ticket
     uses: ./.github/workflows/reuse-create-issue.yml
     with:
       issueType: Task
@@ -23,7 +23,7 @@ jobs:
     secrets: inherit
 
   create-squad-subtask:
-    name: Create ${{ matrix.task.squad }} Squad Tasks
+    name: ${{ matrix.task.squad }} Squad Tasks
     needs: [create-deployment-task]
     strategy:
       matrix:
@@ -67,7 +67,7 @@ jobs:
     secrets: inherit
 
   create-core-subtask:
-    name: Create Core Squad Tasks
+    name: Core Squad Tasks
     needs: [create-deployment-task]
     uses: ./.github/workflows/reuse-create-issue.yml
     with:
