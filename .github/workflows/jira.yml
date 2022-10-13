@@ -12,7 +12,7 @@ jobs:
     name: Login
     steps:
       - name: Login
-        uses: atlassian/gajira-login@2.0.1
+        uses: atlassian/gajira-login@master
         env:
           JIRA_BASE_URL: https://einc.atlassian.net
           JIRA_USER_EMAIL: lucas.lim@eblock.ca
@@ -44,7 +44,7 @@ jobs:
 
       - name: Create
         id: create
-        uses: atlassian/gajira-create@v2.0.1
+        uses: atlassian/gajira-create@master
         with:
           project: ED
           issuetype: Task
