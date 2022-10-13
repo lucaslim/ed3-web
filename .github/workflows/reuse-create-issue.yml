@@ -1,0 +1,70 @@
+name: Create Issue 📝
+
+on:
+  workflow_call:
+    inputs:
+      workflowName:
+        required: false
+        type: string
+        default: Create Issue
+      issueType:
+        required: false
+        type: string
+        default: Task
+      description:
+        required: true
+        type: string
+      summary:
+        required: true
+        type: string
+      components:
+        required: true
+        type: string
+      assignee:
+        description: Assignee ID (not the name)
+        required: true
+        type: string
+      priority:
+        required: false
+        type: number
+        default: 3
+      parentIssueNumber:
+        description: This is only required when creating a Sub-Task
+        required: false
+        type: string
+
+    outputs:
+      issueNumber:
+        description: Issue number returned from API
+        value: ${{ jobs.create-issue.outputs.issueNumber }}
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    name: ${{ inputs.workflowName }}
+    outputs:
+      issueNumber: ${{ steps.create.outputs.issue }}
+    steps:
+      - name: Login
+        uses: atlassian/gajira-login@master
+        env:
+          JIRA_BASE_URL: https://einc.atlassian.net
+          JIRA_USER_EMAIL: lucas.lim@eblock.ca
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+      - name: Create
+        id: create
+        uses: atlassian/gajira-create@master
+        with:
+          project: ED
+          issuetype: ${{ inputs.issueType }}
+          summary: ${{ inputs.summary }}
+          description: ${{ inputs.summary }}
+          fields: >-
+            {
+              ${{ inputs.parentIssueNumber !== '' && '"parent": { "key": "${{ inputs.parentIssueNumber }}" },' || '' }}
+              "assignee": { "id": "${{ inputs.assignees }}" },
+              "components": [{ "name": "${{ inputs.components }}" }],
+              "customfield_10048": [{ "value": "edealer-web-2" }],
+              "priority": { "id": "${{ input.priority }}" }
+            }
