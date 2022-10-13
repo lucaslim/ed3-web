@@ -20,6 +20,7 @@ jobs:
       components: ED3 Build and Deployment
       priority: 2
       assignee: 62e923b550bd9783f62ac424
+    secrets: inherit
 
   create-squad-subtask:
     name: Create ${{ matrix.task.squad }} Squad Tasks
@@ -63,6 +64,7 @@ jobs:
       priority: 2
       assignee: ${{ matrix.task.user }}
       parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
+    secrets: inherit
 
   create-core-subtask:
     name: Create Core Squad Tasks
@@ -91,6 +93,7 @@ jobs:
       priority: 2
       assignee: 62e923b550bd9783f62ac424
       parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
+    secrets: inherit
 
   # test-notify:
   #   runs-on: ubuntu-latest
