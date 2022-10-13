@@ -12,7 +12,7 @@ jobs:
     name: Login
     steps:
       - name: Login
-        uses: atlassian/gajira-login@v2.0.1
+        uses: atlassian/gajira-login@2.0.1
         env:
           JIRA_BASE_URL: https://einc.atlassian.net
           JIRA_USER_EMAIL: lucas.lim@eblock.ca
