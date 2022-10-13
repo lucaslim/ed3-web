@@ -36,7 +36,7 @@ jobs:
       - name: Restore config
         uses: actions/download-artifact@v3
         with:
-          name: config
+          path: |
             /home/runner/.jira.d/
             /home/runner/jira/
 
