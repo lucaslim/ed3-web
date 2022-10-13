@@ -10,7 +10,6 @@ jobs:
   create-deployment-task:
     runs-on: ubuntu-latest
     name: Create Deployment Ticket
-    needs: [login]
     outputs:
       issueNumber: ${{ steps.create.outputs.issue }}
     steps:
