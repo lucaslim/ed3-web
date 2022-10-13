@@ -62,7 +62,7 @@ jobs:
           description: ${{ inputs.summary }}
           fields: >-
             {
-              ${{ inputs.parentIssueNumber != '' && '"parent": { "key": "${{ inputs.parentIssueNumber }}" },' || '' }}
+              ${{ inputs.parentIssueNumber != '' && '"parent": { "key": "a" },' || '' }}
               "assignee": { "id": "${{ inputs.assignees }}" },
               "components": [{ "name": "${{ inputs.components }}" }],
               "customfield_10048": [{ "value": "edealer-web-2" }],
