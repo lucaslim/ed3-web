@@ -8,11 +8,20 @@ jobs:
     name: Login
     steps:
       - name: Login
-        uses: atlassian/gajira-login@master
+        uses: atlassian/gajira-login@v2.0.1
         env:
           JIRA_BASE_URL: https://einc.atlassian.net
           JIRA_USER_EMAIL: lucas.lim@eblock.ca
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+      - name: Persist config to workspace
+        uses: actions/upload-artifact@v3
+        with:
+          name: config
+          path: |
+            ${{ github.workspace }}/.jira.d/*
+            ${{ github.workspace }}/jira/*
+          retention-days: 1
 
   create-deployment-task:
     runs-on: ubuntu-latest
@@ -21,9 +30,17 @@ jobs:
     outputs:
       issueNumber: ${{ steps.create.outputs.issue }}
     steps:
+      - name: Restore build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: config
+          path: |
+            ${{ github.workspace }}/.jira.d/*
+            ${{ github.workspace }}/jira/*
+
       - name: Create
         id: create
-        uses: atlassian/gajira-create@master
+        uses: atlassian/gajira-create@v2.0.1
         with:
           project: ED
           issuetype: Task
