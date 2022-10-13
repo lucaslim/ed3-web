@@ -22,8 +22,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: |
-            /home/runner/.jira.d/config.yml
-            /home/runner/.jira.d/credentials
             /home/runner/jira/config.yml
           retention-days: 1
 
@@ -38,8 +36,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: |
-            /home/runner/.jira.d/config.yml
-            /home/runner/.jira.d/credentials
             /home/runner/jira/config.yml
 
       - name: Create
