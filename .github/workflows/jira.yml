@@ -8,43 +8,20 @@ concurrency:
 
 jobs:
   create-deployment-task:
-    runs-on: ubuntu-latest
     name: Create Deployment Ticket
-    outputs:
-      issueNumber: ${{ steps.create.outputs.issue }}
-    steps:
-      - name: Login
-        uses: atlassian/gajira-login@master
-        env:
-          JIRA_BASE_URL: https://einc.atlassian.net
-          JIRA_USER_EMAIL: lucas.lim@eblock.ca
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    uses: ./.github/workflows/reuse-create-issue.yml
+    with:
+      issueType: Task
+      summary: "[WEB] Deploy X.X.X to Production"
+      description: |
+        In order to deploy the web app to prod, we follow the process outlined [here|https://einc.atlassian.net/l/cp/mrU42BW5#Staging---stage].
 
-      - name: Create
-        id: create
-        uses: atlassian/gajira-create@master
-        with:
-          project: ED
-          issuetype: Task
-          summary: |
-            [WEB] Deploy X.X.X to Production
-          description: |
-            In order to deploy the web app to prod, we follow the process outlined [here|https://einc.atlassian.net/l/cp/mrU42BW5#Staging---stage].
-
-            This process is broken into subtasks to be completed among the squads and deployer.
-          fields: >-
-            {
-              "assignee": { "id": "62e923b550bd9783f62ac424" },
-              "components": [{ "name": "ED3 Build and Deployment" }],
-              "customfield_10048": [{ "value": "edealer-web-2" }],
-              "priority": { "id": "2" }
-            }
-
-      - name: Log created issue
-        run: echo "Issue ${{ steps.create.outputs.issue }} was created"
+        This process is broken into subtasks to be completed among the squads and deployer.
+      components: ED3 Build and Deployment
+      priority: 2
+      assignee: 62e923b550bd9783f62ac424
 
   create-squad-subtask:
-    runs-on: ubuntu-latest
     name: Create ${{ matrix.task.squad }} Squad Tasks
     needs: [create-deployment-task]
     strategy:
@@ -55,97 +32,83 @@ jobs:
             # Tyler
             { user: "6128fbab0bbbf90071170fc8", squad: "Inventory" },
           ]
-    steps:
-      - name: Login
-        uses: atlassian/gajira-login@master
-        env:
-          JIRA_BASE_URL: https://einc.atlassian.net
-          JIRA_USER_EMAIL: lucas.lim@eblock.ca
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    uses: ./.github/workflows/reuse-create-issue.yml
+    with:
+      issueType: Sub-task
+      summary: "[WEB] ${{ matrix.task.squad }} Squad X.X.X release verification"
+      description: |
+        h2. Latest Dev api updates
 
-      - name: Create
-        id: create
-        uses: atlassian/gajira-create@master
-        with:
-          project: ED
-          issuetype: Sub-task
-          summary: |
-            [WEB] ${{ matrix.task.squad }} Squad X.X.X release verification
-          description: |
-            h2. Latest Dev api updates
+        * (post PR link for squad dev api updates corresponding to latest stage)
+        * Should always regenerate API updates the day new stage is released to ensure no missed updates.
 
-            * (post PR link for squad dev api updates corresponding to latest stage)
-            * Should always regenerate API updates the day new stage is released to ensure no missed updates.
+        h2. LD flags on prod env are properly set e.g. for new/partial features etc
 
-            h2. LD flags on prod env are properly set e.g. for new/partial features etc
+        * (what FFs were verified?)
 
-            * (what FFs were verified?)
+        h2. QA of bugs/features on stage env
 
-            h2. QA of bugs/features on stage env
+        * (summary of what was tested by squad)
 
-            * (summary of what was tested by squad)
+        h2. All automated tests pass
 
-            h2. All automated tests pass
+        * (post link to cypress run here)
 
-            * (post link to cypress run here)
+        ----
 
+        h3. Reference:
 
-
-            ----
-
-            h3. Reference:
-
-            [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
-          fields: >-
-            {
-              "assignee": { "id": "${{ matrix.task.user }}" },
-              "components": [{ "name": "ED3 Build and Deployment" }],
-              "customfield_10048": [{ "value": "edealer-web-2" }],
-              "parent": { "key": "${{ needs.create-deployment-task.outputs.issueNumber }}" },
-              "priority": { "id": "2" }
-            }
+        [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+      components: ED3 Build and Deployment
+      priority: 2
+      assignee: ${{ matrix.task.user }}
+      parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
 
   create-core-subtask:
-    runs-on: ubuntu-latest
     name: Create Core Squad Tasks
     needs: [create-deployment-task]
-    steps:
-      - name: Login
-        uses: atlassian/gajira-login@master
-        env:
-          JIRA_BASE_URL: https://einc.atlassian.net
-          JIRA_USER_EMAIL: lucas.lim@eblock.ca
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    uses: ./.github/workflows/reuse-create-issue.yml
+    with:
+      issueType: Sub-task
+      summary: "[WEB] X.X.X deployment"
+      description: |
+        Deployment record created (pending squad verification subtasks)
 
-      - name: Create
-        id: create
-        uses: atlassian/gajira-create@master
-        with:
-          project: ED
-          issuetype: Sub-task
-          summary: |
-            [WEB] X.X.X deployment
-          description: |
-            Deployment record created (pending squad verification subtasks)
+        * https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0*
 
-            * https://github.com/carmigo/edealer-web-v2/releases/tag/\[Release Number]*
+        Deployed to prod (pending BE deployment)
 
-            Deployed to prod (pending BE deployment)
-
-            * (Link to GH deploy action)
+        * (Link to GH deploy action)
 
 
 
-            ----
+        ----
 
-            h3. Reference:
+        h3. Reference:
 
-            [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
-          fields: >-
-            {
-              "assignee": { "id": "62e923b550bd9783f62ac424" },
-              "components": [{ "name": "ED3 Build and Deployment" }],
-              "customfield_10048": [{ "value": "edealer-web-2" }],
-              "parent": { "key": "${{ needs.create-deployment-task.outputs.issueNumber }}" },
-              "priority": { "id": "2" }
-            }
+        [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+      components: ED3 Build and Deployment
+      priority: 2
+      assignee: 62e923b550bd9783f62ac424
+      parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
+
+  # test-notify:
+  #   runs-on: ubuntu-latest
+  #   needs: [create-squad-subtask, create-core-subtask]
+  #   steps:
+  #     - name: Slack Notification
+  #       uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_USERNAME: EDealer Release
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  #         SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
+  #         MSG_MINIMAL: true
+  #         SLACK_TITLE: " "
+  #         SLACK_MESSAGE: |
+  #           <!channel>
+
+  #           :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+  #           _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ fromJSON(needs.check-status.outputs.circleStatus).pipelineNumber }} | view pipeline>_
+
+  #           <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
