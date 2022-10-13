@@ -30,7 +30,7 @@ jobs:
     outputs:
       issueNumber: ${{ steps.create.outputs.issue }}
     steps:
-      - name: Restore build artifacts
+      - name: Restore config
         uses: actions/download-artifact@v3
         with:
           name: config
