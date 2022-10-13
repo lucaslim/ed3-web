@@ -3,9 +3,9 @@ name: Jira
 on: push
 
 jobs:
-  build:
+  login:
     runs-on: ubuntu-latest
-    name: Jira Example
+    name: Login
     steps:
       - name: Login
         uses: atlassian/gajira-login@master
@@ -14,9 +14,16 @@ jobs:
           JIRA_USER_EMAIL: lucas.lim@eblock.ca
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
+  create-deployment-task:
+    runs-on: ubuntu-latest
+    name: Create Deployment Ticket
+    needs: [login]
+    outputs:
+      issueNumber: ${{ steps.create.outputs.issue }}
+    steps:
       - name: Create
         id: create
-        uses: atlassian/gajira-create@master
+        uses: atlassian/gajira-create@2.0.1
         with:
           project: ED
           issuetype: Task
@@ -36,3 +43,58 @@ jobs:
 
       - name: Log created issue
         run: echo "Issue ${{ steps.create.outputs.issue }} was created"
+
+  create-deployment-subtask:
+    runs-on: ubuntu-latest
+    name: Create Deployment Subtasks
+    needs: [create-deployment-task]
+    strategy:
+      matrix:
+        users: [
+            # Anthony
+            { user: "6241d45af813eb00692829f7", squad: "Blue" },
+            # Tyler
+            { user: "6128fbab0bbbf90071170fc8", squad: "Inventory" },
+          ]
+    steps:
+      - name: Create
+        id: create
+        uses: atlassian/gajira-create@2.0.1
+        with:
+          project: ED
+          issuetype: SubTask
+          summary: |
+            [WEB] ${{ matrix.squad }} Squad X.X.X release verification
+          description: |
+            h2. Latest Dev api updates
+
+            * (post PR link for squad dev api updates corresponding to latest stage)
+            * Should always regenerate API updates the day new stage is released to ensure no missed updates.
+
+            h2. LD flags on prod env are properly set e.g. for new/partial features etc
+
+            * (what FFs were verified?)
+
+            h2. QA of bugs/features on stage env
+
+            * (summary of what was tested by squad)
+
+            h2. All automated tests pass
+
+            * (post link to cypress run here)
+
+
+
+            ----
+
+            h3. Reference:
+
+            [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+          fields: >-
+            {
+              "assignee": { "id": "${{ matrix.user }}" },
+              "components": [{ "name": "ED3 Build and Deployment" }],
+              "customfield_10048": [{ "value": "edealer-web-2" }],
+              "parent": "${{ needs.create-deployment-task.output.issueNumber }}"
+              "priority": { "id": "2" }
+            }
