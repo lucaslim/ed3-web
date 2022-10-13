@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Create
         id: create
-        uses: atlassian/gajira-create@2.0.1
+        uses: atlassian/gajira-create@v2.0.1
         with:
           project: ED
           issuetype: Task
@@ -59,7 +59,7 @@ jobs:
     steps:
       - name: Create
         id: create
-        uses: atlassian/gajira-create@2.0.1
+        uses: atlassian/gajira-create@v2.0.1
         with:
           project: ED
           issuetype: SubTask
