@@ -68,7 +68,7 @@ jobs:
         uses: atlassian/gajira-create@master
         with:
           project: ED
-          issuetype: Sub-task
+          issuetype: "Sub-task"
           summary: |
             [WEB] ${{ matrix.squad }} Squad X.X.X release verification
           description: |
