@@ -22,9 +22,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: config
-          path: |
-            /home/runner/.jira.d/*
-            /home/runner/jira/*
+          path: /home/runner/jira/
           retention-days: 1
 
   create-deployment-task:
@@ -38,9 +36,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: config
-          path: |
-            /home/runner/.jira.d/
-            /home/runner/jira/
+          path: /home/runner/jira/
 
       - name: Create
         id: create
