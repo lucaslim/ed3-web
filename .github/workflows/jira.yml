@@ -1,0 +1,30 @@
+name: Jira
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Jira Example
+    steps:
+      - name: Login
+        uses: atlassian/gajira-login@master
+        env:
+          JIRA_BASE_URL: https://einc.atlassian.net
+          JIRA_USER_EMAIL: github-action[bot]@users.noreply.github.com
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+      - name: Create
+        id: create
+        uses: atlassian/gajira-create@master
+        with:
+          project: Retail (ED)
+          issuetype: Task
+          summary: |
+            Build completed for ${{ github.repository }}
+          description: |
+            Compare branch
+          fields: '{"Components": "ED3 Build and Deployment", "Repository": "edealer-web-v2"}'
+
+      - name: Log created issue
+        run: echo "Issue ${{ steps.create.outputs.issue }} was created"
