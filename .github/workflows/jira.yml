@@ -21,7 +21,6 @@ jobs:
       - name: Persist config to workspace
         uses: actions/upload-artifact@v3
         with:
-          name: config
           path: |
             /home/runner/.jira.d/
             /home/runner/jira/
@@ -38,7 +37,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: config
-          path: |
             /home/runner/.jira.d/
             /home/runner/jira/
 
