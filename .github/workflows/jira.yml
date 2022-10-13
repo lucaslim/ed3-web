@@ -39,8 +39,8 @@ jobs:
         with:
           name: config
           path: |
-            /home/runner/.jira.d/*
-            /home/runner/jira/*
+            /home/runner/.jira.d/
+            /home/runner/jira/
 
       - name: Create
         id: create
