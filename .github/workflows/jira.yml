@@ -109,22 +109,37 @@ jobs:
           channel-id: C0461JBK90R
           payload: |
             {
-              attachments: [
+              "attachments": [
                 {
-                  color: "22bb33",
-                  authorName: "lucaslim",
-                  authorLink: "https://github.com/lucaslim",
-                  authorIcon: "https://github.com/lucaslim.png?size=32",
-                  fields: [
+                  "color": "#22bb33",
+                  "fields": [
                     {
-                      title: "title",
-                      short: false,
-                      value: "yep"
+                      "title": "Status",
+                      "short": true,
+                      "value": "In Progress"
                     }
                   ]
                 }
               ]
             }
+          # payload: |
+          #   {
+          #     attachments: [
+          #       {
+          #         color: "22bb33",
+          #         authorName: "lucaslim",
+          #         authorLink: "https://github.com/lucaslim",
+          #         authorIcon: "https://github.com/lucaslim.png?size=32",
+          #         fields: [
+          #           {
+          #             title: "title",
+          #             short: false,
+          #             value: "yep"
+          #           }
+          #         ]
+          #       }
+          #     ]
+          #   }
 
           # slack-message: |
           #   <!channel>
