@@ -109,19 +109,34 @@ jobs:
           channel-id: C0461JBK90R
           payload: |
             {
-              attachments: [
+              "attachments": [
                 {
-                  color: "22bb33",
-                  fields: [
+                  "color": "28a745",
+                  "fields": [
                     {
-                      title: " ",
-                      short: false,
-                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:",
-                    },
-                  ],
-                },
-              ],
+                      "title": "Status",
+                      "short": true,
+                      "value": "Completed"
+                    }
+                  ]
+                }
+              ]
             }
+          # payload: |
+          #   {
+          #     attachments: [
+          #       {
+          #         color: "22bb33",
+          #         fields: [
+          #           {
+          #             title: " ",
+          #             short: false,
+          #             value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:",
+          #           },
+          #         ],
+          #       },
+          #     ],
+          #   }
 
           # slack-message: |
           #   <!channel>
