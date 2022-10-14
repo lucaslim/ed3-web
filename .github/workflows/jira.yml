@@ -112,9 +112,6 @@ jobs:
               attachments: [
                 {
                   color: "#22bb33",
-                  authorName: "lucaslim",
-                  authorLink: "https://github.com/lucaslim",
-                  authorIcon: "https://github.com/lucaslim.png?size=32",
                   fields: [
                     {
                       title: "",
