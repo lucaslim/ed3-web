@@ -9,7 +9,15 @@ on:
       includeActor:
         required: false
         type: boolean
+        default: true
+      asAttachment:
+        required: false
+        type: boolean
         default: false
+      color:
+        required: false
+        type: string
+        default: good
       threadId:
         required: false
         type: string
@@ -38,7 +46,7 @@ jobs:
 
       - name: Slack Notification (include Actor)
         id: slack-include-actor
-        if: ${{ inputs.includeActor }}
+        if: ${{ inputs.asAttachment }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: C0461JBK90R
@@ -48,10 +56,10 @@ jobs:
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
-                  "color": "good",
-                  "author_name": "${{ github.actor }}",
-                  "author_link": "https://github.com/${{ github.actor }}",
-                  "author_icon": "https://github.com/${{ github.actor }}.png?size=32",
+                  ${{ inputs.includeActor && format('"author_name": "{0}",', github.actor) || '' }}
+                  ${{ inputs.includeActor && format('"author_link": "https://github.com/{0}",', github.actor) || '' }}
+                  ${{ inputs.includeActor && format('"author_icon": "https://github.com/{0}.png?size=32",', github.actor) || '' }}
+                  "color": "${{ inputs.color }}",
                   "fields": [
                     {
                       "title": "",
@@ -65,7 +73,7 @@ jobs:
 
       - name: Slack Notification
         id: slack
-        if: ${{ !inputs.includeActor }}
+        if: ${{ !inputs.asAttachment }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: C0461JBK90R
