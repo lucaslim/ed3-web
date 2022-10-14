@@ -45,7 +45,6 @@ jobs:
           payload: >-
             {
               ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
-              "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
@@ -78,7 +77,6 @@ jobs:
           payload: >-
             {
               ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
-              "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "blocks": [
