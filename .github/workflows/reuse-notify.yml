@@ -28,7 +28,7 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              "icon_url": https://i.ibb.co/NjrgqSk/EDealer-E.png,
+              "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
                   "color": "good",
