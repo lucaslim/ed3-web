@@ -10,7 +10,7 @@ on:
         required: false
         type: boolean
         default: false
-      threadTs:
+      thread:
         required: false
         type: string
     outputs:
@@ -44,7 +44,7 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              ${{ inputs.threadTs != '' && format('"thread_ts": "{0}",', inputs.threadTs) || '' }}
+              ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
@@ -71,7 +71,7 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              ${{ inputs.threadTs != '' && format('"thread_ts": "{0}",', inputs.threadTs) || '' }}
+              ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "blocks": [
