@@ -114,7 +114,7 @@ jobs:
     with:
       color: danger
       includeActor: false
-      asAttachment: true
+      asAttachment: false
       threadId: "1665758673.234399"
       message: |
         🧪 *End-to-End against (Stage)* 🧪
