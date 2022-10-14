@@ -119,11 +119,11 @@ jobs:
                     {
                       title: "title",
                       short: false,
-                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:",
-                    },
-                  ],
-                },
-              ],
+                      value: "yep"
+                    }
+                  ]
+                }
+              ]
             }
 
           # slack-message: |
