@@ -112,12 +112,12 @@ jobs:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      threadTS: "1665758673.234399"
+      thread: "1665758673.234399"
       title: "End-to-End against Stage started (In Progress)"
       message: |
         🧪 *End-to-End test ran against Stage* 🧪
 
-        Results: _All test passed ✅_
+        *Results:* _All test passed ✅_
 
         <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | View Pipeline>
     secrets: inherit
