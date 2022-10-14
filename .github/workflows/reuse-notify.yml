@@ -34,7 +34,7 @@ jobs:
                     {
                       "title": "",
                       "short": false,
-                      "value": "${{ inputs.message }}"
+                      "value": ${{ inputs.message }}
                     }
                   ]
                 }
