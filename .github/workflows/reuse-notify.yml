@@ -23,6 +23,8 @@ jobs:
   slack:
     name: 💬 Send Message to Slack 🚀
     runs-on: ubuntu-latest
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
     outputs:
       ts: ${{ steps.slack-include-actor.outputs.ts || steps.slack.outputs.ts }}
       thread_ts: ${{ steps.slack-include-actor.outputs.thread_ts || steps.slack.outputs.thread_ts }}
@@ -38,8 +40,6 @@ jobs:
         id: slack-include-actor
         if: ${{ inputs.includeActor }}
         uses: slackapi/slack-github-action@v1.23.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
         with:
           channel-id: C0461JBK90R
           payload: >-
@@ -63,13 +63,13 @@ jobs:
                 }
               ]
             }
+      - run: echo ${{ steps.slack-include-actor.outputs }}
+        if: ${{ inputs.includeActor }}
 
       - name: Slack Notification
         id: slack
         if: ${{ !inputs.includeActor }}
         uses: slackapi/slack-github-action@v1.23.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
         with:
           channel-id: C0461JBK90R
           payload: >-
@@ -88,3 +88,6 @@ jobs:
                 }
               ]
             }
+
+      - run: echo ${{ steps.slack.outputs }}
+        if: ${{ !inputs.includeActor }}
