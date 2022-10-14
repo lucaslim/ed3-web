@@ -112,7 +112,7 @@ jobs:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      thread: "1665758673.234399"
+      threadId: "1665758673.234399"
       title: "End-to-End against Stage started (In Progress)"
       message: |
         🧪 *End-to-End test ran against Stage* 🧪
