@@ -53,13 +53,13 @@ jobs:
           payload: >-
             {
               ${{ inputs.threadId != '' && format('"thread_ts": "{0}",', inputs.threadId) || '' }}
-              "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
                   ${{ inputs.includeActor && format('"author_name": "{0}",', github.actor) || '' }}
                   ${{ inputs.includeActor && format('"author_link": "https://github.com/{0}",', github.actor) || '' }}
                   ${{ inputs.includeActor && format('"author_icon": "https://github.com/{0}.png?size=32",', github.actor) || '' }}
                   "color": "${{ inputs.color }}",
+                  "fallback": "${{ steps.prepare-slack-message.outputs.message }}",
                   "fields": [
                     {
                       "title": "",
@@ -80,7 +80,6 @@ jobs:
           payload: >-
             {
               ${{ inputs.threadId != '' && format('"thread_ts": "{0}",', inputs.threadId) || '' }}
-              "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "blocks": [
                 {
