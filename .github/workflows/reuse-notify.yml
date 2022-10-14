@@ -64,8 +64,8 @@ jobs:
               ]
             }
       - run: |
-          echo ${{ steps.slack-include-actor.outputs.treasteps.slack.outputs.thread_ts }}
-          echo ${{ steps.slack-include-actor.outputs.treasteps.slack.outputs.ts }}
+          echo ${{ steps.slack-include-actor.outputs.thread_ts }}
+          echo ${{ steps.slack-include-actor.outputs.ts }}
         if: ${{ inputs.includeActor }}
 
       - name: Slack Notification
