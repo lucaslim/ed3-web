@@ -6,7 +6,7 @@ on:
       message:
         required: true
         type: string
-      sendAsAttachment:
+      includeActor:
         required: false
         type: boolean
         default: false
@@ -26,8 +26,8 @@ jobs:
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
     outputs:
-      ts: ${{ steps.slack-attachments.outputs.ts }}
-      thread_ts: ${{ steps.slack-attachments.outputs.thread_ts }}
+      ts: ${{ steps.slack-include-actor.outputs.ts || steps.slack.outputs.ts }}
+      thread_ts: ${{ steps.slack-include-actor.outputs.thread_ts || steps.slack.outputs.thread_ts }}
     steps:
       - name: Preparing Slack Message
         id: prepare-slack-message
@@ -36,9 +36,9 @@ jobs:
           SLACK_MESSAGE="$(echo "$SLACK_MESSAGE" | sed -z 's/\n/\\n/g')"
           echo "::set-output name=message::${SLACK_MESSAGE}"
 
-      - name: Slack Notification (with Attachments)
-        id: slack-attachments
-        if: ${{ inputs.sendAsAttachment }}
+      - name: Slack Notification (include Actor)
+        id: slack-include-actor
+        if: ${{ inputs.includeActor }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: C0461JBK90R
@@ -65,7 +65,7 @@ jobs:
 
       - name: Slack Notification
         id: slack
-        if: ${{ !inputs.sendAsAttachment }}
+        if: ${{ !inputs.includeActor }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: C0461JBK90R
