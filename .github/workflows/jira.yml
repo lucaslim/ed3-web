@@ -117,6 +117,7 @@ jobs:
 
 
             <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+      - run: echo "${{ toJSON(steps.slack.outputs) }}"
 
       # - name: 💬 Send Message to Slack 🚀
       #   uses: archive/github-actions-slack@v2.4.0
