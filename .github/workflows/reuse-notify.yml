@@ -1,0 +1,43 @@
+name: Notify 🔊
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        required: true
+        type: string
+
+jobs:
+  slack:
+    name: 💬 Send Message to Slack 🚀
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+        with:
+          channel-id: C0461JBK90R
+          payload: |
+            {
+              "icon_url": https://i.ibb.co/NjrgqSk/EDealer-E.png
+              "attachments": [
+                {
+                  "color": "good",
+                  "author_name": "${{ github.actor }}",
+                  "author_link": "https://github.com/${{ github.actor }}",
+                  "author_icon": "https://github.com/${{ github.actor }}.png?size=32",
+                  "fields": [
+                    {
+                      "title": "",
+                      "short": false,
+                      "value": "${{ inputs.message }}"
+                    }
+                  ]
+                }
+              ]
+            }
+      - run: echo "${{ toJSON(steps.slack.outputs) }}"
