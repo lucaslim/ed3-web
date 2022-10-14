@@ -41,12 +41,10 @@ jobs:
         if: ${{ inputs.includeActor }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
-          channel-id:
-            C0461JBK90R
-            # ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
+          channel-id: C0461JBK90R
           payload: >-
             {
-              "thread_ts": "1665758673.234399",
+              ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
