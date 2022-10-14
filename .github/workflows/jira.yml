@@ -107,38 +107,17 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
         with:
           channel-id: C0461JBK90R
-          payload: |
-            {
-              "attachments": [
-                {
-                  "blocks": [
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "image",
-                          "image_url": "https://slack-imgs.com/?c=1&o1=wi64.he64.si&url=https%3A%2F%2Fgithub.com%2F${{ github.actor }}.png%3Fsize%3D64",
-                          "alt_text": "${{ github.actor }}"
-                        },
-                        {
-                          "type": "mrkdwn",
-                          "text": "*${{ github.actor }}*"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:\n\n_All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_\n\n\n<https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
+          slack-message: |
+            <!channel>
+
+            :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+            _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
+
+            *Tickets awaiting Verification*
+
+
+            <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
       - run: echo "${{ toJSON(steps.slack.outputs) }}"
 
       # - name: 💬 Send Message to Slack 🚀
@@ -146,16 +125,16 @@ jobs:
       #   with:
       #     slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
       #     slack-channel: C0461JBK90R
-      # slack-text: |
-      #   <!channel>
+      #     slack-text: |
+      #       <!channel>
 
-      #   :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+      #       :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
 
-      #   _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
+      #       _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
 
-      #   *Tickets awaiting Verification*
+      #       *Tickets awaiting Verification*
 
-      #   <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+      #       <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
 
       # - name: Slack Notification
       #   uses: rtCamp/action-slack-notify@v2
