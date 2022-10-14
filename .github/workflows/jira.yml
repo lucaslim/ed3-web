@@ -116,7 +116,7 @@ jobs:
                     {
                       title: " ",
                       short: false,
-                      value: "<!channel> test value",
+                      value: "test value",
                     },
                   ],
                 },
