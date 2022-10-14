@@ -7,107 +7,106 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  create-deployment-task:
-    name: Deployment Ticket
-    uses: ./.github/workflows/reuse-create-issue.yml
-    with:
-      issueType: Task
-      summary: "[WEB] Deploy X.X.X to Production"
-      description: |
-        In order to deploy the web app to prod, we follow the process outlined [here|https://einc.atlassian.net/l/cp/mrU42BW5#Staging---stage].
+  # create-deployment-task:
+  #   name: Deployment Ticket
+  #   uses: ./.github/workflows/reuse-create-issue.yml
+  #   with:
+  #     issueType: Task
+  #     summary: "[WEB] Deploy X.X.X to Production"
+  #     description: |
+  #       In order to deploy the web app to prod, we follow the process outlined [here|https://einc.atlassian.net/l/cp/mrU42BW5#Staging---stage].
 
-        This process is broken into subtasks to be completed among the squads and deployer.
-      components: ED3 Build and Deployment
-      priority: 2
-      assignee: 62e923b550bd9783f62ac424
-    secrets: inherit
+  #       This process is broken into subtasks to be completed among the squads and deployer.
+  #     components: ED3 Build and Deployment
+  #     priority: 2
+  #     assignee: 62e923b550bd9783f62ac424
+  #   secrets: inherit
 
-  create-squad-subtask:
-    name: ${{ matrix.task.squad }} Squad Tasks
-    needs: [create-deployment-task]
-    strategy:
-      matrix:
-        task: [
-            # Anthony
-            { user: "6241d45af813eb00692829f7", squad: "Blue" },
-            # Tyler
-            { user: "6128fbab0bbbf90071170fc8", squad: "Inventory" },
-          ]
-    uses: ./.github/workflows/reuse-create-issue.yml
-    with:
-      issueType: Sub-task
-      summary: "[WEB] ${{ matrix.task.squad }} Squad X.X.X release verification"
-      description: |
-        h2. Latest Dev api updates
+  # create-squad-subtask:
+  #   name: ${{ matrix.task.squad }} Squad Tasks
+  #   needs: [create-deployment-task]
+  #   strategy:
+  #     matrix:
+  #       task: [
+  #           # Anthony
+  #           { user: "6241d45af813eb00692829f7", squad: "Blue" },
+  #           # Tyler
+  #           { user: "6128fbab0bbbf90071170fc8", squad: "Inventory" },
+  #         ]
+  #   uses: ./.github/workflows/reuse-create-issue.yml
+  #   with:
+  #     issueType: Sub-task
+  #     summary: "[WEB] ${{ matrix.task.squad }} Squad X.X.X release verification"
+  #     description: |
+  #       h2. Latest Dev api updates
 
-        * (post PR link for squad dev api updates corresponding to latest stage)
-        * Should always regenerate API updates the day new stage is released to ensure no missed updates.
+  #       * (post PR link for squad dev api updates corresponding to latest stage)
+  #       * Should always regenerate API updates the day new stage is released to ensure no missed updates.
 
-        h2. LD flags on prod env are properly set e.g. for new/partial features etc
+  #       h2. LD flags on prod env are properly set e.g. for new/partial features etc
 
-        * (what FFs were verified?)
+  #       * (what FFs were verified?)
 
-        h2. QA of bugs/features on stage env
+  #       h2. QA of bugs/features on stage env
 
-        * (summary of what was tested by squad)
+  #       * (summary of what was tested by squad)
 
-        h2. All automated tests pass
+  #       h2. All automated tests pass
 
-        * (post link to cypress run here)
+  #       * (post link to cypress run here)
 
-        ----
+  #       ----
 
-        h3. Reference:
+  #       h3. Reference:
 
-        [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
-      components: ED3 Build and Deployment
-      priority: 2
-      assignee: ${{ matrix.task.user }}
-      parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
-    secrets: inherit
+  #       [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+  #     components: ED3 Build and Deployment
+  #     priority: 2
+  #     assignee: ${{ matrix.task.user }}
+  #     parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
+  #   secrets: inherit
 
-  create-core-subtask:
-    name: Core Squad Tasks
-    needs: [create-deployment-task]
-    uses: ./.github/workflows/reuse-create-issue.yml
-    with:
-      issueType: Sub-task
-      summary: "[WEB] X.X.X deployment"
-      description: |
-        Deployment record created (pending squad verification subtasks)
+  # create-core-subtask:
+  #   name: Core Squad Tasks
+  #   needs: [create-deployment-task]
+  #   uses: ./.github/workflows/reuse-create-issue.yml
+  #   with:
+  #     issueType: Sub-task
+  #     summary: "[WEB] X.X.X deployment"
+  #     description: |
+  #       Deployment record created (pending squad verification subtasks)
 
-        * https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0*
+  #       * https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0*
 
-        Deployed to prod (pending BE deployment)
+  #       Deployed to prod (pending BE deployment)
 
-        * (Link to GH deploy action)
+  #       * (Link to GH deploy action)
 
+  #       ----
 
+  #       h3. Reference:
 
-        ----
-
-        h3. Reference:
-
-        [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
-      components: ED3 Build and Deployment
-      priority: 2
-      assignee: 62e923b550bd9783f62ac424
-      parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
-    secrets: inherit
+  #       [https://einc.atlassian.net/l/cp/5NPANkvr|https://einc.atlassian.net/l/cp/5NPANkvr|smart-link]
+  #     components: ED3 Build and Deployment
+  #     priority: 2
+  #     assignee: 62e923b550bd9783f62ac424
+  #     parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
+  #   secrets: inherit
 
   test-notify:
     runs-on: ubuntu-latest
-    needs: [create-squad-subtask, create-core-subtask]
+    # needs: [create-squad-subtask, create-core-subtask]
     steps:
       - run: |
           echo "${{ needs.create-core-subtask.outputs.issueNumber }}"
           echo "${{ toJSON(needs.create-squad-subtask.outputs) }}"
       - name: 💬 Send Message to Slack 🚀
-        uses: archive/github-actions-slack@v2.4.0
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
         with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: C0461JBK90R
-          slack-text: |
+          channel-id: C0461JBK90R
+          slack-message: |
             <!channel>
 
             :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
@@ -118,6 +117,22 @@ jobs:
 
 
             <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+
+      # - name: 💬 Send Message to Slack 🚀
+      #   uses: archive/github-actions-slack@v2.4.0
+      #   with:
+      #     slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+      #     slack-channel: C0461JBK90R
+      #     slack-text: |
+      #       <!channel>
+
+      #       :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+      #       _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
+
+      #       *Tickets awaiting Verification*
+
+      #       <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
 
       # - name: Slack Notification
       #   uses: rtCamp/action-slack-notify@v2
