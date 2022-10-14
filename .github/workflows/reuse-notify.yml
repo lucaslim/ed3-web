@@ -12,7 +12,8 @@ jobs:
     name: 💬 Send Message to Slack 🚀
     runs-on: ubuntu-latest
     steps:
-      - id: slack-message
+      - name: Preparing Slack Message
+        id: prepare-slack-message
         run: |
           SLACK_MESSAGE="${{ inputs.message }}"
           SLACK_MESSAGE="$(echo "$SLACK_MESSAGE" | sed -z 's/\n/\\n/g')"
@@ -28,9 +29,11 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
+              "text": "Release Notification"
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
+                  "fallback": "${{ steps.prepare-slack-message.outputs.message }}"
                   "color": "good",
                   "author_name": "${{ github.actor }}",
                   "author_link": "https://github.com/${{ github.actor }}",
@@ -39,7 +42,7 @@ jobs:
                     {
                       "title": "",
                       "short": false,
-                      "value": "${{ steps.slack-message.outputs.message }}"
+                      "value": "${{ steps.prepare-slack-message.outputs.message }}"
                     }
                   ]
                 }
