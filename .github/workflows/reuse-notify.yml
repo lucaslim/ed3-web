@@ -39,7 +39,7 @@ jobs:
                     {
                       "title": "",
                       "short": false,
-                      "value": ${{ steps.slack-message.outputs.message }}
+                      "value": "${{ steps.slack-message.outputs.message }}"
                     }
                   ]
                 }
