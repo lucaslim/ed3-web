@@ -29,11 +29,11 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              "text": "Release Notification"
+              "text": "Release Notification",
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
-                  "fallback": "${{ steps.prepare-slack-message.outputs.message }}"
+                  "fallback": "${{ steps.prepare-slack-message.outputs.message }}",
                   "color": "good",
                   "author_name": "${{ github.actor }}",
                   "author_link": "https://github.com/${{ github.actor }}",
