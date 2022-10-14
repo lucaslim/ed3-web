@@ -3,6 +3,9 @@ name: Notify 🔊
 on:
   workflow_call:
     inputs:
+      title:
+        required: false
+        type: string
       message:
         required: true
         type: string
@@ -45,6 +48,7 @@ jobs:
           payload: >-
             {
               ${{ inputs.thread != '' && format('"thread_ts": "{0}",', inputs.thread) || '' }}
+              ${{ inputs.title != '' && format('"text": "{0}",', inputs.title) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
@@ -62,11 +66,6 @@ jobs:
                 }
               ]
             }
-      - run: |
-          echo ${{ toJSON(steps.slack-include-actor.outputs) }}
-          echo ${{ steps.slack-include-actor.outputs.thread_ts }}
-          echo ${{ steps.slack-include-actor.outputs.ts }}
-        if: ${{ inputs.includeActor }}
 
       - name: Slack Notification
         id: slack
@@ -89,8 +88,3 @@ jobs:
                 }
               ]
             }
-
-      - run: |
-          echo ${{ steps.slack.outputs.thread_ts }}
-          echo ${{ steps.slack.outputs.ts }}
-        if: ${{ !inputs.includeActor }}

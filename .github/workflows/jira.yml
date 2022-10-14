@@ -93,23 +93,31 @@ jobs:
   #     parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
   #   secrets: inherit
 
+  # notify:
+  #   name: Notify
+  #   uses: ./.github/workflows/reuse-notify.yml
+  #   with:
+  #     includeActor: true
+  #     message: |
+  #       <!channel>
+
+  #       :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+  #       _All test passed ✅ - <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | view pipeline>_
+
+  #       <https://github.com/7.8.0/releases/tag/7.8.0 | See release notes>
+  #   secrets: inherit
+
   notify:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      includeActor: false
       thread: "1665758673.234399"
+      title: "End-to-End against Stage started (In Progress)"
       message: |
-        <!channel>
+        *Status*
 
-        :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine: 
-
-
-        _All test passed ✅ - <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | view pipeline>_
-
-
-
-        <https://github.com/7.8.0/releases/tag/7.8.0 | See release notes>
+        In Progress
     secrets: inherit
 
   outputs:
