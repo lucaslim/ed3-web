@@ -97,13 +97,15 @@ jobs:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      includeActor: false
+      includeActor: true
       message: |
         <!channel>
 
         :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine: 
 
+
         _All test passed ✅ - <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | view pipeline>_
+
 
         <https://github.com/7.8.0/releases/tag/7.8.0 | See release notes>
     secrets: inherit
