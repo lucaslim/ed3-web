@@ -79,7 +79,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ steps.prepare-slack-message.outputs.message }}",
+                    "text": "${{ steps.prepare-slack-message.outputs.message }}"
                   }
                 }
               ]
