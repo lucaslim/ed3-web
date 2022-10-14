@@ -10,6 +10,9 @@ on:
         required: false
         type: boolean
         default: false
+      threadTs:
+        required: false
+        type: string
     outputs:
       ts:
         value: ${{ jobs.slack.outputs.ts }}
@@ -20,9 +23,11 @@ jobs:
   slack:
     name: 💬 Send Message to Slack 🚀
     runs-on: ubuntu-latest
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
     outputs:
-      ts: ${{ steps.slack.outputs.ts }}
-      thread_ts: ${{ steps.slack.outputs.thread_ts }}
+      ts: ${{ steps.slack-attachments.outputs.ts }}
+      thread_ts: ${{ steps.slack-attachments.outputs.thread_ts }}
     steps:
       - name: Preparing Slack Message
         id: prepare-slack-message
@@ -30,17 +35,17 @@ jobs:
           SLACK_MESSAGE="${{ inputs.message }}"
           SLACK_MESSAGE="$(echo "$SLACK_MESSAGE" | sed -z 's/\n/\\n/g')"
           echo "::set-output name=message::${SLACK_MESSAGE}"
-      - name: Slack Notification
-        id: slack
+
+      - name: Slack Notification (with Attachments)
+        id: slack-attachments
+        if: ${{ inputs.sendAsAttachment }}
         uses: slackapi/slack-github-action@v1.23.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
         with:
           channel-id: C0461JBK90R
           payload: >-
             {
+              ${{ inputs.threadTs != '' && format('"thread_ts": "{0}",', inputs.threadTs) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
-              "thread_ts": "1665755015.748619",
               "attachments": [
                 {
                   "color": "good",
@@ -57,4 +62,16 @@ jobs:
                 }
               ]
             }
-      - run: echo "${{ toJSON(steps.slack.outputs) }}"
+
+      - name: Slack Notification
+        id: slack
+        if: ${{ !inputs.sendAsAttachment }}
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: C0461JBK90R
+          payload: >-
+            {
+              ${{ inputs.threadTs != '' && format('"thread_ts": "{0}",', inputs.threadTs) || '' }}
+              "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
+              "text": "${{ steps.prepare-slack-message.outputs.message }}"
+            }
