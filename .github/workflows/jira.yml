@@ -98,7 +98,7 @@ jobs:
     uses: ./.github/workflows/reuse-notify.yml
     with:
       includeActor: true
-      thread: 1665757465.275679
+      # thread: 1665757465.275679
       message: |
         <!channel>
 
@@ -106,6 +106,7 @@ jobs:
 
 
         _All test passed ✅ - <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | view pipeline>_
+
 
 
         <https://github.com/7.8.0/releases/tag/7.8.0 | See release notes>
