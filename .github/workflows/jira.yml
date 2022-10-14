@@ -97,7 +97,7 @@ jobs:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      includeActor: false
+      includeActor: true
       thread: 1665757465.275679
       message: |
         <!channel>
