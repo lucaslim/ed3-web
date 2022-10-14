@@ -3,9 +3,6 @@ name: Notify 🔊
 on:
   workflow_call:
     inputs:
-      title:
-        required: false
-        type: string
       message:
         required: true
         type: string
@@ -13,10 +10,7 @@ on:
         required: false
         type: boolean
         default: false
-      threadTS:
-        required: false
-        type: string
-      updateTS:
+      threadId:
         required: false
         type: string
     outputs:
@@ -50,9 +44,7 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              ${{ inputs.threadTS != '' && format('"thread_ts": "{0}",', inputs.threadTS) || '' }}
-              ${{ inputs.updateTS != '' && format('"update_ts": "{0}",', inputs.updateTS) || '' }}
-              ${{ inputs.title != '' && format('"text": "{0}",', inputs.title) || '' }}
+              ${{ inputs.threadId != '' && format('"thread_ts": "{0}",', inputs.threadId) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
@@ -79,9 +71,7 @@ jobs:
           channel-id: C0461JBK90R
           payload: >-
             {
-              ${{ inputs.threadTS != '' && format('"thread_ts": "{0}",', inputs.threadTS) || '' }}
-              ${{ inputs.updateTS != '' && format('"update_ts": "{0}",', inputs.updateTS) || '' }}
-              ${{ inputs.title != '' && format('"text": "{0}",', inputs.title) || '' }}
+              ${{ inputs.threadId != '' && format('"thread_ts": "{0}",', inputs.threadId) || '' }}
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "text": "${{ steps.prepare-slack-message.outputs.message }}",
               "blocks": [
@@ -94,4 +84,3 @@ jobs:
                 }
               ]
             }
-      - run: echo "${{ toJSON(steps.slack.outputs) }}"
