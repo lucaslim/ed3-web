@@ -64,6 +64,7 @@ jobs:
               ]
             }
       - run: |
+          echo ${{ toJSON(steps.slack-include-actor.outputs) }}
           echo ${{ steps.slack-include-actor.outputs.thread_ts }}
           echo ${{ steps.slack-include-actor.outputs.ts }}
         if: ${{ inputs.includeActor }}
