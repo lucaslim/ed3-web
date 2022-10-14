@@ -117,9 +117,7 @@ jobs:
       asAttachment: true
       threadId: "1665758673.234399"
       message: |
-        🧪 *End-to-end test (Stage)* 🧪
-
-        *Results:* _Some test had failed ⛔️_
+        🧪 _End-to-End test had failed ⛔️_
 
         <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | View Pipeline>
     secrets: inherit
