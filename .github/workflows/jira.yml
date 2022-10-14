@@ -124,14 +124,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [notify-e2e-start]
     steps:
-      - run: sleep 20
+      - run: sleep 5
 
   notify-e2e-end:
     name: Notify
     needs: [notify-e2e-start, sleep]
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      updateTS: "${{ needs.notify-e2e-start.outputs.ts }}"
+      updateTS: "${{ needs.notify-e2e-start.outputs.thread_ts }}"
       title: "End-to-End against Stage finished"
       message: |
         *Status*
