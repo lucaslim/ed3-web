@@ -119,7 +119,7 @@ jobs:
       message: |
         🧪 *End-to-End against (Stage)* 🧪
 
-        _Some test had failed ⛔️_
+        <@U045GAYJADU> _Some test had failed ⛔️_
 
         <https://app.circleci.com/pipelines/github/${{ github.repository }}/aaa | View Pipeline>
     secrets: inherit
