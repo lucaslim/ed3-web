@@ -117,9 +117,9 @@ jobs:
                   authorIcon: "https://github.com/lucaslim.png?size=32",
                   fields: [
                     {
-                      title: "",
+                      title: " ",
                       short: false,
-                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:\n\n_All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_\n\n<https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>",
+                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:",
                     },
                   ],
                 },
