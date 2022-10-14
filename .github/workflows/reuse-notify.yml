@@ -23,13 +23,11 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
+          # SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         with:
           channel-id: C0461JBK90R
           payload: >-
             {
-              "text": "Release Notification",
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
               "attachments": [
                 {
