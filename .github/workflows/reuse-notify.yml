@@ -63,7 +63,7 @@ jobs:
                 }
               ]
             }
-      - run: echo ${{ steps.slack-include-actor.outputs }}
+      - run: echo ${{ toJSON(steps.slack-include-actor.outputs) }}
         if: ${{ inputs.includeActor }}
 
       - name: Slack Notification
@@ -89,5 +89,5 @@ jobs:
               ]
             }
 
-      - run: echo ${{ steps.slack.outputs }}
+      - run: echo ${{ toJSON(steps.slack.outputs) }}
         if: ${{ !inputs.includeActor }}
