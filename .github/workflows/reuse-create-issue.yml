@@ -52,14 +52,14 @@ jobs:
           JIRA_USER_EMAIL: lucas.lim@eblock.ca
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
-      - name: Create
+      - name: Create Issue
         id: create
         uses: atlassian/gajira-create@master
         with:
           project: ED
           issuetype: ${{ inputs.issueType }}
           summary: ${{ inputs.summary }}
-          description: ${{ inputs.summary }}
+          description: ${{ inputs.description }}
           fields: >-
             {
               ${{ inputs.parentIssueNumber != '' && format('"parent": {{ "key": "{0}" }},', inputs.parentIssueNumber) || '' }}

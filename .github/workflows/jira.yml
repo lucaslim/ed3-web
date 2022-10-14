@@ -95,23 +95,29 @@ jobs:
       parentIssueNumber: ${{ needs.create-deployment-task.outputs.issueNumber }}
     secrets: inherit
 
-  # test-notify:
-  #   runs-on: ubuntu-latest
-  #   needs: [create-squad-subtask, create-core-subtask]
-  #   steps:
-  #     - name: Slack Notification
-  #       uses: rtCamp/action-slack-notify@v2
-  #       env:
-  #         SLACK_USERNAME: EDealer Release
-  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-  #         SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
-  #         MSG_MINIMAL: true
-  #         SLACK_TITLE: " "
-  #         SLACK_MESSAGE: |
-  #           <!channel>
+  test-notify:
+    runs-on: ubuntu-latest
+    needs: [create-squad-subtask, create-core-subtask]
+    steps:
+      - run: |
+          echo "${{ needs.create-core-subtask.outputs.issueNumber }}"
+          echo "${{ needs.create-squad-subtask.outputs }}"
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: EDealer Release
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
+          MSG_MINIMAL: true
+          SLACK_TITLE: " "
+          SLACK_MESSAGE: |
+            <!channel>
 
-  #           :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+            :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
 
-  #           _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ fromJSON(needs.check-status.outputs.circleStatus).pipelineNumber }} | view pipeline>_
+            _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ fromJSON(needs.check-status.outputs.circleStatus).pipelineNumber }} | view pipeline>_
 
-  #           <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+            *Tickets awaiting Verification*
+
+
+            <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
