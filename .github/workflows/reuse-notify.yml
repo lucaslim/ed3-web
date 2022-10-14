@@ -12,6 +12,13 @@ jobs:
     name: 💬 Send Message to Slack 🚀
     runs-on: ubuntu-latest
     steps:
+      - id: slack-message
+        run: |
+          message=$("${{ inputs.message }}")
+          echo $message
+          echo "::set-output name=message::$message"
+      - run: |
+          echo ${{ steps.slack-message.outputs.message }}
       - name: Slack Notification
         uses: slackapi/slack-github-action@v1.23.0
         env:
