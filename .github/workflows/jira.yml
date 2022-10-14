@@ -146,16 +146,16 @@ jobs:
       #   with:
       #     slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
       #     slack-channel: C0461JBK90R
-          slack-text: |
-            <!channel>
+      # slack-text: |
+      #   <!channel>
 
-            :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+      #   :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
 
-            _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
+      #   _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
 
-            *Tickets awaiting Verification*
+      #   *Tickets awaiting Verification*
 
-            <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+      #   <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
 
       # - name: Slack Notification
       #   uses: rtCamp/action-slack-notify@v2
