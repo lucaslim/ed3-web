@@ -109,22 +109,23 @@ jobs:
           channel-id: C0461JBK90R
           payload: |
             {
-              "attachments": [
+              attachments: [
                 {
-                  "color": "#22bb33",
-                  "authorName": "${{ github.actor }}",
-                  "authorLink": "https://github.com/${{ github.actor }}"
-                  "authorIcon": "https://github.com/${{ github.actor }}.png?size=32"
-                  "fields": [
+                  color: "#22bb33",
+                  authorName: "lucaslim",
+                  authorLink: "https://github.com/lucaslim",
+                  authorIcon: "https://github.com/lucaslim.png?size=32",
+                  fields: [
                     {
-                      "title": "",
-                      "short": false,
-                      "value": "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:\n\n_All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_\n\n<https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>"
-                    }
-                  ]
-                }
-              ]
+                      title: "",
+                      short: false,
+                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:\n\n_All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_\n\n<https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>",
+                    },
+                  ],
+                },
+              ],
             }
+
           # slack-message: |
           #   <!channel>
 
