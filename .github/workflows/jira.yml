@@ -112,11 +112,14 @@ jobs:
               attachments: [
                 {
                   color: "22bb33",
+                  authorName: "lucaslim",
+                  authorLink: "https://github.com/lucaslim",
+                  authorIcon: "https://github.com/lucaslim.png?size=32",
                   fields: [
                     {
-                      title: " ",
+                      title: "title",
                       short: false,
-                      value: "test value",
+                      value: "<!channel>\n\n:rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:",
                     },
                   ],
                 },
