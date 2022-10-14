@@ -102,15 +102,12 @@ jobs:
       - run: |
           echo "${{ needs.create-core-subtask.outputs.issueNumber }}"
           echo "${{ toJSON(needs.create-squad-subtask.outputs) }}"
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_USERNAME: EDealer Release
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
-          MSG_MINIMAL: true
-          SLACK_TITLE: " "
-          SLACK_MESSAGE: |
+      - name: 💬 Send Message to Slack 🚀
+        uses: archive/github-actions-slack@v2.4.0
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: C0461JBK90R
+          slack-text: |
             <!channel>
 
             :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
@@ -121,3 +118,22 @@ jobs:
 
 
             <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
+
+      # - name: Slack Notification
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_USERNAME: EDealer Release
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_ICON: https://i.ibb.co/NjrgqSk/EDealer-E.png
+      #     MSG_MINIMAL: true
+      #     SLACK_TITLE: " "
+      # SLACK_MESSAGE: |
+      #   <!channel>
+
+      #   :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+      #   _All test passed ✅ - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/XXX | view pipeline>_
+
+      #   *Tickets awaiting Verification*
+
+      #   <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
