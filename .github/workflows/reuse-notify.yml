@@ -6,11 +6,23 @@ on:
       message:
         required: true
         type: string
+      sendAsAttachment:
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      ts:
+        value: ${{ jobs.slack.outputs.ts }}
+      thread_ts:
+        value: ${{ jobs.slack.outputs.thread_ts }}
 
 jobs:
   slack:
     name: 💬 Send Message to Slack 🚀
     runs-on: ubuntu-latest
+    outputs:
+      ts: ${{ steps.slack.outputs.ts }}
+      thread_ts: ${{ steps.slack.outputs.thread_ts }}
     steps:
       - name: Preparing Slack Message
         id: prepare-slack-message
@@ -30,6 +42,7 @@ jobs:
           payload: >-
             {
               "icon_url": "https://i.ibb.co/NjrgqSk/EDealer-E.png",
+              "thread_ts": "1665755015.748619",
               "attachments": [
                 {
                   "color": "good",
