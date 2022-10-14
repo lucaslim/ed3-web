@@ -97,7 +97,7 @@ jobs:
     name: Notify
     uses: ./.github/workflows/reuse-notify.yml
     with:
-      sendAsAttachment: false
+      includeActor: false
       message: |
         <!channel>
 
