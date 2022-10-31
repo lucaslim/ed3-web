@@ -25,16 +25,18 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: xt0rted/pull-request-comment-branch@v1
-        id: comment-branch
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
 
-      - name: Context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      # - name: Context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
 
       - name: Check Comment
         uses: Khan/pull-request-comment-trigger@1.0.0
+        if: steps.branch-name.outputs.is_default == 'false'
         id: check
         with:
           trigger: "!refresh"
@@ -45,7 +47,7 @@ jobs:
       - name: Check Lokalise Update
         run: |
           echo "${{ steps.check.outputs.triggered == 'true' }}"
-          echo "${{ steps.comment-branch.outputs.head_ref }}"
+          echo "${{ steps.branch-name.outputs.current_branch }}"
 
       # - uses: agilepathway/label-checker@v1.2.6
       #   with:
