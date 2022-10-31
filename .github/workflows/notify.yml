@@ -1,19 +1,18 @@
 name: Test Slack Notification
 
-on: push
+on: workflow_dispatch
 
 jobs:
-  test-notify:
+  test-e2e:
     runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-      SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+    outputs:
+      pipelineId: "${{ fromJSON(steps.cypress-test.outputs.response).id }}"
     steps:
       - name: Run Unit and End-to-End
         id: cypress-test
         uses: fjogeleit/http-request-action@v1
         with:
-          url: "https://circleci.com/api/v2/project/gh/${{ github.repository }}/pipeline"
+          url: "https://circleci.com/api/v2/project/gh/carmigo/edealer-web-v2/pipeline"
           method: "POST"
           customHeaders: >-
             {
@@ -31,11 +30,72 @@ jobs:
               }
             }
 
-      - name: Show Response
-        run: |
-          echo ${{ steps.myRequest.outputs.response }}
-          echo ${{ steps.myRequest.outputs.headers }}
+      # - name: Show Response
+      #   run: |
+      #     echo '${{ fromJSON(steps.cypress-test.outputs.response).id }}'
+      #     echo '${{ fromJSON(steps.cypress-test.outputs.response) }}'
 
+  check-status:
+    runs-on: ubuntu-latest
+    needs: test-e2e
+    outputs:
+      circleStatus: ${{ steps.check-status.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install p-wait-for@5.0.0 axios@1.1.2
+      - id: check-status
+        env:
+          PIPELINE_ID: ${{ needs.test-e2e.outputs.pipelineId }}
+          CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
+        uses: actions/github-script@v6
+        with:
+          result-encoding: json
+          script: |
+            const axios = require("axios");
+            const { default: pWaitFor } = await import("${{ github.workspace }}/node_modules/p-wait-for/index.js");
+
+            const { PIPELINE_ID, CIRCLECI_TOKEN } = process.env;
+
+            const circleResponse = await pWaitFor(
+              async () => {
+                const response = await axios.get(
+                  `https://circleci.com/api/v2/pipeline/${PIPELINE_ID}/workflow`,
+                  {
+                    headers: {
+                      "x-attribution-login": "lucaslim",
+                      "x-attribution-actor-id": "lucaslim",
+                      "Circle-Token": CIRCLECI_TOKEN,
+                    },
+                  }
+                );
+
+                const status = response.data.items[0].status;
+                if (status === "running") {
+                  return false;
+                } else {
+                  return true && pWaitFor.resolveWith({
+                    pipelineNumber: response.data.items[0].pipeline_number,
+                    status: response.data.items[0].status,
+                  });
+                }
+              },
+              {
+                interval: 2000,
+                timeout: {
+                  milliseconds: 900000,
+                },
+              }
+            );
+
+            return circleResponse;
+
+  test-notify:
+    runs-on: ubuntu-latest
+    needs: check-status
+    steps:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
@@ -48,6 +108,8 @@ jobs:
             <!channel>
 
             :rocket: *WEB :spider_web: PRE-RELEASE v7.8.0 IS ON STAGE* :rocket: :this-is-fine:
+
+            _${{ fromJSON(needs.check-status.outputs.circleStatus).status == 'success' && 'All test passed ✅ ' || 'One or more test had failed ⛔️' }} - <https://app.circleci.com/pipelines/github/carmigo/edealer-web-v2/${{ fromJSON(needs.check-status.outputs.circleStatus).pipelineNumber }} | view pipeline>_
 
             <https://github.com/carmigo/edealer-web-v2/releases/tag/7.8.0 | See release notes>
       # - name: slack-send
