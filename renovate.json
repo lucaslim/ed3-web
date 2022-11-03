@@ -18,15 +18,17 @@
       ],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
+      "matchDatasources": ["npm"],
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "automerge": false,
       "description": "All minor and patch-level core dependencies updates",
-      "groupName": "all non-major core dependencies",
+      "groupName": "all non-major dependencies - Core",
       "groupSlug": "all-minor-patch-core",
+      "matchDatasources": ["npm"],
       "matchManagers": ["npm"],
       "matchPackagePatterns": [
         "@types/react",
@@ -35,16 +37,17 @@
         "react-dom",
         "react-router-dom"
       ],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "automerge": true,
       "description": "All Github maintained actions",
-      "groupName": "all non-major github maintained actions",
+      "groupName": "all non-major github actions - Core",
       "groupSlug": "all-minor-patch-actions-core",
+      "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
       "matchPackagePatterns": ["actions/*"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "automerge": false,
@@ -52,9 +55,10 @@
       "excludePackagePatterns": ["actions/*"],
       "groupName": "all non-major github actions",
       "groupSlug": "all-minor-patch-actions",
+      "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+      "matchUpdateTypes": ["minor", "patch"]
     }
   ]
 }
