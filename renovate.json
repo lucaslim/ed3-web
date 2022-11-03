@@ -21,8 +21,7 @@
       "groupSlug": "actions-core/all-minor-patch",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
-      "matchSourceUrlPrefixes": "https://github.com/actions",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
     }
   ]
