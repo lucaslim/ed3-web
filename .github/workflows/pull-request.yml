@@ -101,7 +101,7 @@ jobs:
         with:
           script: |
             const title = context.payload.pull_request.title;
-            const regex = RegExp(/^(\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s\w.*$/);
+            const regex = RegExp(/^(Revert \"(.*)\")|(Packages - \w.*)|((\[hotfix\]|\[ED-\d{4,5}\])\s((\w|\s)*\s\-)\s\w.*)$/);
 
             if (!regex.test(title)) {
               core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`)
