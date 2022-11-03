@@ -1,6 +1,45 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["npm"],
+  "commitMessagePrefix": "Packages -",
   "extends": [
-    "config:base"
+    "config:base",
+    "group:allNonMajor",
+    "group:linters",
+    "group:unitTest",
+    "group:typescript-eslintMonorepo",
+    "group:storybookMonorepo",
+    "schedule:weekly"
+  ],
+  "ignoreTests": false,
+  "platformAutomerge": true,
+  "rebaseWhen": "behind-base-branch",
+  "assignees": ["lucaslim"],
+  "labels": ["category/dependencies", "automation"],
+  "packageRules": [
+    {
+      "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
+      "matchDatasources": ["npm"],
+      "stabilityDays": 3
+    },
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "automerge": true,
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "rebaseWhen": "behind-base-branch",
+      "stabilityDays": 3
+    },
+    {
+      "description": "Lock @types/node to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "14.17.0"
+    },
+    {
+      "description": "Lock ReactDayPicker to v7.x.x until major upgrade to v8 [ED-3011]",
+      "matchPackageNames": ["react-day-picker"],
+      "allowedVersions": "/^7(\\.[0-9]+)+/"
+    }
   ]
 }
