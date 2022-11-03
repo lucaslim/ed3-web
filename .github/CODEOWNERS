@@ -1,5 +1,6 @@
-* @lucaslim
+- @lucaslim
 
+.github/\*
 **/package.json
 **/yarn.lock
-**/README.md
+\*\*/README.md
