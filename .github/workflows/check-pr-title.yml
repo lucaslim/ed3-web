@@ -17,8 +17,8 @@ jobs:
         uses: tibdex/github-app-token@v1.7.0
         id: generate-token
         with:
-          app_id: ${{ secrets.EDEALER_AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.EDEALER_AUTOMATION_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - uses: actions/github-script@v6.3.3
         id: pr-title
