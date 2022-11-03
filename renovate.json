@@ -43,7 +43,17 @@
       "groupName": "all non-major github maintained actions",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
-      "matchPackagePrefixes": ["actions"],
+      "matchPackagePatterns": ["actions/*"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+    },
+    {
+      "automerge": false,
+      "description": "All Github actions",
+      "excludePackagePatterns": ["actions/*"],
+      "groupName": "all non-major github actions",
+      "groupSlug": "all-minor-patch-actions",
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
     }
   ]
