@@ -47,18 +47,17 @@
       "groupSlug": "all-minor-patch-actions-core",
       "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
-      "matchPackagePatterns": ["actions/*"],
+      "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "automerge": false,
       "description": "All Github actions",
-      "excludePackagePatterns": ["actions/*"],
+      "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
       "groupSlug": "all-minor-patch-actions",
       "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
-      "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch"]
     }
   ]
