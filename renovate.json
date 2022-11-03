@@ -4,8 +4,11 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "updateTypes": ["minor", "patch"],
-      "automerge": true
+      "description": "Automatically merge minor and patch-level updates",
+      "automerge": true,
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "rebaseWhen": "behind-base-branch"
     }
   ]
 }
