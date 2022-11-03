@@ -1495,10 +1495,10 @@ graphql@14.0.2:
   dependencies:
     iterall "^1.2.2"
 
-graphql@^16.6.0:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.6.0.tgz#c2dcffa4649db149f6282af726c8c83f1c7c5fdb"
-  integrity sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==
+graphql@15:
+  version "15.8.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.8.0.tgz#33410e96b012fa3bdb1091cc99a94769db212b38"
+  integrity sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw==
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
@@ -2045,17 +2045,17 @@ p-locate@^5.0.0:
   dependencies:
     p-limit "^3.0.2"
 
-p-timeout@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-6.0.0.tgz#84c210f5500da1af4c31ab2768d794e5e081dd91"
-  integrity sha512-5iS61MOdUMemWH9CORQRxVXTp9g5K8rPnI9uQpo97aWgsH3vVXKjkIhDi+OgIDmN3Ly9+AZ2fZV01Wut1yzfKA==
+p-timeout@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-5.1.0.tgz#b3c691cf4415138ce2d9cfe071dba11f0fee085b"
+  integrity sha512-auFDyzzzGZZZdHz3BtET9VEz0SE/uMEAx7uWfGPucfzEwwe/xH0iVeZibQmANYE/hp9T2+UUZT5m+BKyrDp3Ew==
 
-p-wait-for@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/p-wait-for/-/p-wait-for-5.0.0.tgz#67e0f7e83969f7e0da59f6f0b9fd38452eb8dbd5"
-  integrity sha512-nkxeZInKET8e78NTtqBgxpnxDLbiCiQnGdoTnkLkluovfTyI5UTCrGwPNOr6ewJ90NpWyxEFt1ToZ96LmIXXHQ==
+p-wait-for@4:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/p-wait-for/-/p-wait-for-4.1.0.tgz#290f126f49bbd7c84e0cedccb342cd631aaa0f16"
+  integrity sha512-i8nE5q++9h8oaQHWltS1Tnnv4IoMDOlqN7C0KFG2OdbK0iFJIt6CROZ8wfBM+K4Pxqfnq4C4lkkpXqTEpB5DZw==
   dependencies:
-    p-timeout "^6.0.0"
+    p-timeout "^5.0.0"
 
 parent-module@^1.0.0:
   version "1.0.1"
