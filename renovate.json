@@ -6,19 +6,14 @@
   "prConcurrentLimit": 10,
   "packageRules": [
     {
+      "extends": ["group:allNonMajor"],
       "automerge": false,
-      "description": "All minor and patch-level updates",
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "rebaseWhen": "behind-base-branch"
+      "matchManagers": ["npm"]
     },
     {
       "automerge": true,
       "description": "All Github maintained actions",
-      "groupName": "github maintained actions non-major dependencies",
+      "groupName": "all non-major github actions dependencies",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
