@@ -3,7 +3,6 @@
   "commitMessagePrefix": "Packages -",
   "dependencyDashboard": true,
   "extends": ["config:base"],
-  "platformAutomerge": true,
   "prConcurrentLimit": 10,
   "packageRules": [
     {
@@ -17,11 +16,13 @@
       "rebaseWhen": "behind-base-branch"
     },
     {
+      "automerge": true,
       "groupName": "GitHub Actions Core (non-major)",
       "groupSlug": "actions-core/all-minor-patch",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "platformAutomerge": true,
       "rebaseWhen": "behind-base-branch"
     }
   ]
