@@ -19,7 +19,7 @@
       "groupName": "GitHub Actions Core (non-major)",
       "groupSlug": "actions-core/all-minor-patch",
       "matchManagers": ["github-actions"],
-      "matchPackagePatterns": ["*"],
+      "matchPackagePrefixes": ["actions/"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
     }
