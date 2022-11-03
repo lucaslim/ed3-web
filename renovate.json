@@ -8,6 +8,11 @@
   "platformAutomerge": true,
   "packageRules": [
     {
+      "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
+      "matchDatasources": ["npm"],
+      "stabilityDays": 3
+    },
+    {
       "automerge": false,
       "description": "All minor and patch-level non-core dependencies updates",
       "excludePackagePatterns": [
@@ -19,7 +24,6 @@
       ],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
-      "matchDatasources": ["npm"],
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch"]
@@ -29,7 +33,6 @@
       "description": "All minor and patch-level core dependencies updates",
       "groupName": "all non-major dependencies - Core",
       "groupSlug": "all-minor-patch-core",
-      "matchDatasources": ["npm"],
       "matchManagers": ["npm"],
       "matchPackagePatterns": [
         "@types/react",
