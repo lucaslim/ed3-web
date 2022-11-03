@@ -16,7 +16,7 @@
       "rebaseWhen": "behind-base-branch"
     },
     {
-      "matchPackagePrefixes": ["actions/"],
+      "matchPackagePatterns": ["actions/"],
       "matchDatasources": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "groupName": "GitHub Actions Core (non-major)",
