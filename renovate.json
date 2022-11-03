@@ -8,12 +8,33 @@
   "packageRules": [
     {
       "automerge": false,
-      "description": "All minor and patch-level dev dependencies updates",
-      "groupName": "all non-major dev dependencies",
+      "description": "All minor and patch-level non-core dependencies updates",
+      "excludePackagePatterns": [
+        "@types/react",
+        "@types/react-dom",
+        "react",
+        "react-dom",
+        "react-router-dom"
+      ],
+      "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
-      "matchDepTypes": ["devDependencies"],
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+    },
+    {
+      "automerge": false,
+      "description": "All minor and patch-level core dependencies updates",
+      "groupName": "all non-major core dependencies",
+      "groupSlug": "all-minor-patch-core",
+      "matchManagers": ["npm"],
+      "matchPackagePatterns": [
+        "@types/react",
+        "@types/react-dom",
+        "react",
+        "react-dom",
+        "react-router-dom"
+      ],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
     },
     {
