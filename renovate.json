@@ -12,14 +12,14 @@
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
       "matchDatasources": ["npm"]
+    },
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "automerge": true,
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "rebaseWhen": "behind-base-branch"
     }
-    // {
-    //   "description": "Automatically merge minor and patch-level updates",
-    //   "automerge": true,
-    //   "matchDatasources": ["npm"],
-    //   "matchDepTypes": ["devDependencies"],
-    //   "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-    //   "rebaseWhen": "behind-base-branch"
-    // }
   ]
 }
