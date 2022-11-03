@@ -8,7 +8,7 @@
     {
       "automerge": false,
       "description": "Automatically merge minor and patch-level updates",
-      "groupName": "all dependencies (non-major)",
+      "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
@@ -17,7 +17,7 @@
     },
     {
       "automerge": true,
-      "groupName": "github actions core (non-major)",
+      "groupName": "github maintained actions non-major dependencies",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
