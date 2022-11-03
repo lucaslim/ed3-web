@@ -10,7 +10,7 @@
       "description": "Automatically merge minor and patch-level updates",
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
-      "matchDatasources": ["npm"],
+      "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
@@ -18,7 +18,7 @@
     {
       "groupName": "GitHub Actions Core (non-major)",
       "groupSlug": "actions-core/all-minor-patch",
-      "matchDatasources": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
