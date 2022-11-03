@@ -3613,22 +3613,22 @@ p-locate@^5.0.0:
   dependencies:
     p-limit "^3.0.2"
 
-p-timeout@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-5.1.0.tgz#b3c691cf4415138ce2d9cfe071dba11f0fee085b"
-  integrity sha512-auFDyzzzGZZZdHz3BtET9VEz0SE/uMEAx7uWfGPucfzEwwe/xH0iVeZibQmANYE/hp9T2+UUZT5m+BKyrDp3Ew==
+p-timeout@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-6.0.0.tgz#84c210f5500da1af4c31ab2768d794e5e081dd91"
+  integrity sha512-5iS61MOdUMemWH9CORQRxVXTp9g5K8rPnI9uQpo97aWgsH3vVXKjkIhDi+OgIDmN3Ly9+AZ2fZV01Wut1yzfKA==
 
 p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-p-wait-for@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/p-wait-for/-/p-wait-for-4.0.0.tgz#b4f488eef4365c295f6b21b852b95752d077b670"
-  integrity sha512-nNTv4xr44ZCilARTe9Bbh0+Ou5D2O1y8CPUsgH7ok6r1F7pSHM7pkOjaySgrW+sq3l4NEMFtLu8u8rgHm6TK5w==
+p-wait-for@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/p-wait-for/-/p-wait-for-5.0.0.tgz#67e0f7e83969f7e0da59f6f0b9fd38452eb8dbd5"
+  integrity sha512-nkxeZInKET8e78NTtqBgxpnxDLbiCiQnGdoTnkLkluovfTyI5UTCrGwPNOr6ewJ90NpWyxEFt1ToZ96LmIXXHQ==
   dependencies:
-    p-timeout "^5.0.0"
+    p-timeout "^6.0.0"
 
 parent-module@^1.0.0:
   version "1.0.1"
