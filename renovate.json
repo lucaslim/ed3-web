@@ -6,17 +6,21 @@
   "platformAutomerge": true,
   "packageRules": [
     {
-      "description": "Automatically merge minor and patch-level updates",
       "automerge": false,
+      "description": "Automatically merge minor and patch-level updates",
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
       "matchDatasources": ["npm"],
+      "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
     },
     {
       "matchPackagePrefixes": ["actions/"],
       "matchDatasources": ["github-actions"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "GitHub Actions Core (non-major)"
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "GitHub Actions Core (non-major)",
+      "groupSlug": "actions-core/all-minor-patch"
     }
   ]
 }
