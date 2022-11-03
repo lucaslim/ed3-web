@@ -45,7 +45,6 @@
       "description": "All Github maintained actions",
       "groupName": "all non-major github actions - Core",
       "groupSlug": "all-minor-patch-actions-core",
-      "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["minor", "patch"]
@@ -56,7 +55,6 @@
       "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
       "groupSlug": "all-minor-patch-actions",
-      "matchDatasources": ["npm"],
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"]
     }
