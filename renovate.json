@@ -4,6 +4,7 @@
   "dependencyDashboard": true,
   "extends": ["config:base"],
   "prConcurrentLimit": 10,
+  "platformAutomerge": true,
   "packageRules": [
     {
       "extends": ["group:allNonMajor"],
@@ -18,7 +19,6 @@
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "platformAutomerge": true,
       "rebaseWhen": "behind-base-branch"
     }
   ]
