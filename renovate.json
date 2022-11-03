@@ -17,7 +17,6 @@
       "description": "Automatically merge minor and patch-level updates",
       "automerge": true,
       "matchDatasources": ["npm"],
-      "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
     }
