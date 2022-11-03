@@ -16,11 +16,12 @@
       "rebaseWhen": "behind-base-branch"
     },
     {
-      "matchPackagePatterns": ["actions/"],
-      "matchDatasources": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "groupName": "GitHub Actions Core (non-major)",
-      "groupSlug": "actions-core/all-minor-patch"
+      "groupSlug": "actions-core/all-minor-patch",
+      "matchDatasources": ["github-actions"],
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "rebaseWhen": "behind-base-branch"
     }
   ]
 }
