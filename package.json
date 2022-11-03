@@ -14,13 +14,18 @@
   },
   "homepage": "https://github.com/lucaslim/ed3-web#readme",
   "dependencies": {
-    "graphql-inspector": "^0.5.1"
+    "graphql-inspector": "^0.5.1",
+    "react": "18",
+    "react-helmet": "6.1.0",
+    "react-router": "6"
   },
   "devDependencies": {
     "@actions/github": "5.1.1",
     "@graphql-inspector/ci": "^3.4.0",
     "@types/axios": "0.14.0",
     "axios": "1.1.2",
+    "eslint": "8",
+    "eslint-config-airbnb": "19",
     "graphql": "^16.6.0",
     "p-wait-for": "5.0.0"
   }
