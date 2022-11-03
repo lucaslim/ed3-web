@@ -8,17 +8,5 @@
   "rebaseWhen": "behind-base-branch",
   "assignees": ["lucaslim"],
   "labels": ["category/dependencies", "automation"],
-  "packageRules": [
-    {
-      "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
-      "matchDatasources": ["npm"]
-    },
-    {
-      "description": "Automatically merge minor and patch-level updates",
-      "automerge": true,
-      "matchDatasources": ["npm"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "rebaseWhen": "behind-base-branch"
-    }
-  ]
+  "packageRules": []
 }
