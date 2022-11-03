@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["npm", "github-actions"],
   "commitMessagePrefix": "Packages -",
   "dependencyDashboard": true,
   "extends": ["config:base"],
