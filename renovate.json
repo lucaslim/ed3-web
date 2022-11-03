@@ -10,6 +10,12 @@
       "matchDatasources": ["npm"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "rebaseWhen": "behind-base-branch"
+    },
+    {
+      "matchPackagePrefixes": ["actions/"],
+      "matchDatasources": ["github-actions"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "GitHub Actions Core (non-major)"
     }
   ]
 }

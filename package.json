@@ -24,7 +24,7 @@
     "@graphql-inspector/ci": "^3.4.0",
     "@types/axios": "0.14.0",
     "axios": "1.1.1",
-    "eslint": "8",
+    "eslint": "^8.25.0",
     "eslint-config-airbnb": "19",
     "graphql": "15",
     "p-wait-for": "4"
