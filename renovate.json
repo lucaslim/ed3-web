@@ -4,6 +4,7 @@
   "dependencyDashboard": true,
   "extends": ["config:base"],
   "platformAutomerge": true,
+  "prConcurrentLimit": 3,
   "packageRules": [
     {
       "automerge": false,
