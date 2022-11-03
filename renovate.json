@@ -7,7 +7,7 @@
   "packageRules": [
     {
       "automerge": false,
-      "description": "Automatically merge minor and patch-level updates",
+      "description": "All minor and patch-level updates",
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
@@ -17,6 +17,7 @@
     },
     {
       "automerge": true,
+      "description": "All Github maintained actions",
       "groupName": "github maintained actions non-major dependencies",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
