@@ -11,8 +11,7 @@
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
-      "matchDatasources": ["npm"],
-      "stabilityDays": 3
+      "matchDatasources": ["npm"]
     },
     {
       "description": "Automatically merge minor and patch-level updates",
@@ -20,8 +19,7 @@
       "matchDatasources": ["npm"],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "rebaseWhen": "behind-base-branch",
-      "stabilityDays": 3
+      "rebaseWhen": "behind-base-branch"
     },
     {
       "description": "Lock @types/node to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
