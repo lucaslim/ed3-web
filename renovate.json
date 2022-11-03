@@ -22,6 +22,7 @@
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchSourceUrlPrefixes": "https://github.com/actions",
       "rebaseWhen": "behind-base-branch"
     }
   ]
