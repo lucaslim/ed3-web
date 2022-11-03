@@ -17,7 +17,7 @@
     },
     {
       "automerge": true,
-      "groupName": "all non-major github actions core dependencies",
+      "groupName": "GitHub actions core (non-major)",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
