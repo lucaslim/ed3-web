@@ -4,8 +4,6 @@ on:
   pull_request:
     types:
       - opened
-      - review_requested
-      - synchronize
     branches:
       - "renovate/**"
   pull_request_review:
