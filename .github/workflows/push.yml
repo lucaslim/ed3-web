@@ -8,6 +8,6 @@ jobs:
   renovate-auto:
     runs-on: ubuntu-latest
     steps:
-      - uses: lucaslim/renovate-auto-approve-action
+      - uses: lucaslim/renovate-auto-approve-action@main
         with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
