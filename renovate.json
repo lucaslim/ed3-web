@@ -5,7 +5,7 @@
   "dependencyDashboard": true,
   "extends": ["config:base"],
   "prConcurrentLimit": 10,
-  "platformAutomerge": true,
+  "platformAutomerge": false,
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
