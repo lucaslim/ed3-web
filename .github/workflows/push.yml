@@ -5,15 +5,16 @@ on:
     types:
       - opened
     branches:
-      - "renovate\/**"
+      - master
   pull_request_review:
     types:
       - dismissed
     branches:
-      - "renovate\/**"
+      - master
 
 jobs:
   github-bot-approve:
+    if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     steps:
       - uses: lucaslim/renovate-auto-approve-action@main
@@ -21,6 +22,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   edealer-bot-approve:
+    if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     steps:
       - name: Generate App Token
