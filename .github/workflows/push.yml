@@ -1,8 +1,18 @@
 name: Push
 
 on:
-  - pull_request_review
-  - pull_request
+  pull_request:
+    types:
+      - opened
+      - review_requested
+      - synchronize
+    branches:
+      - "renovate/**"
+  pull_request_review:
+    types:
+      - dismissed
+    branches:
+      - "renovate/**"
 
 jobs:
   github-bot-approve:
