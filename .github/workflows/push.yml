@@ -1,7 +1,7 @@
 name: Push
 
 on:
-  - push
+  - pull_request_review
   - pull_request
 
 jobs:
