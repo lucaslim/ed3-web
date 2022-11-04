@@ -5,9 +5,23 @@ on:
   - pull_request
 
 jobs:
-  renovate-auto:
+  github-bot-approve:
     runs-on: ubuntu-latest
     steps:
       - uses: lucaslim/renovate-auto-approve-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  edealer-bot-approve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate App Token
+        uses: tibdex/github-app-token@v1.7.0
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: lucaslim/renovate-auto-approve-action@main
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
