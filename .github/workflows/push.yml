@@ -1,8 +1,8 @@
 name: Push
 
 on:
-  push:
-  pull_request:
+  - push
+  - pull_request
 
 jobs:
   renovate-auto:
