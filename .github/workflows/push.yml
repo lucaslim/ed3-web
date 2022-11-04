@@ -2,11 +2,11 @@ name: Push
 
 on:
   pull_request:
-    branches:
-      - "renovate/**"
+    types:
+      - opened
   pull_request_review:
-    branches:
-      - "renovate/**"
+    types:
+      - dismissed
 
 jobs:
   github-bot-approve:
