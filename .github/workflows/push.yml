@@ -5,12 +5,12 @@ on:
     types:
       - opened
     branches:
-      - master
+      - main
   pull_request_review:
     types:
       - dismissed
     branches:
-      - master
+      - main
 
 jobs:
   github-bot-approve:
