@@ -4,9 +4,13 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - "renovate\/**"
   pull_request_review:
     types:
       - dismissed
+    branches:
+      - "renovate\/**"
 
 jobs:
   github-bot-approve:
