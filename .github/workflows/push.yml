@@ -1,0 +1,13 @@
+name: Push
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  renovate-auto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lucaslim/renovate-auto-approve-action
+        with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
