@@ -61,13 +61,6 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
-      "description": "Update Apollo Packages (non-major)",
-      "automerge": true,
-      "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
-      "groupName": "all non-major apollo graphql dependencies",
-      "matchUpdateTypes": ["digest", "patch", "minor"]
-    },
-    {
       "description": "Update linters (non-major)",
       "automerge": true,
       "extends": ["packages:linters", "schedule:nonOfficeHours"],
@@ -80,6 +73,14 @@
       "automerge": true,
       "extends": ["packages:unitTest", "schedule:nonOfficeHours"],
       "groupName": "all non-major unit test",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update Github Actions (non-major)",
+      "automerge": true,
+      "extends": ["schedule:nonOfficeHours"],
+      "groupName": "all non-major github actions",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
