@@ -24,19 +24,19 @@
     },
     {
       "automerge": true,
-      "extends": ["monorepo:react", "schedule:nonOfficeHours"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all non-major react dependencies",
-      "groupSlug": "react/all-minor-patch"
-    },
-    {
-      "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "automerge": true,
+      "extends": ["monorepo:react", "schedule:nonOfficeHours"],
+      "matchUpdateTypes": ["digest", "patch", "minor"],
+      "groupName": "all non-major react dependencies",
+      "groupSlug": "react/all-minor-patch"
     },
     {
       "automerge": true,
@@ -44,7 +44,7 @@
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "automerge": false,
@@ -52,7 +52,7 @@
       "groupName": "all non-major github actions",
       "groupSlug": "all-minor-patch-actions",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Lock @types/node and node engine to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
