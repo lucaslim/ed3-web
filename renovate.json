@@ -57,7 +57,7 @@
       "description": "Update @Storybook monorepo Packages (non-major)",
       "automerge": true,
       "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
-      "groupName": "torybook monorepo dependencies (non-major)",
+      "groupName": "storybook monorepo dependencies (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
