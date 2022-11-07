@@ -9,6 +9,12 @@
   "assignees": ["lucaslim"],
   "reviewers": ["team:retail-frontend-codeowners"],
   "labels": ["category/dependencies", "automation"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "automerge": false,
+    "rangeStrategy": "update-lockfile"
+  },
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
