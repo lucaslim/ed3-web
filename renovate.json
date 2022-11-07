@@ -23,6 +23,7 @@
       "stabilityDays": 3
     },
     {
+      "description": "Update All Dependencies (non-major)",
       "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
       "groupName": "all non-major dependencies",
@@ -32,25 +33,32 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
+      "description": "Update React Packages (non-major)",
       "automerge": true,
       "extends": ["monorepo:react", "schedule:nonOfficeHours"],
-      "matchUpdateTypes": ["digest", "patch", "minor"],
       "groupName": "all non-major react dependencies",
-      "groupSlug": "react/all-minor-patch"
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
+      "description": "Update React-Router Packages (non-major)",
+      "automerge": true,
+      "extends": ["monorepo:react-router", "schedule:nonOfficeHours"],
+      "groupName": "all non-major react-router dependencies",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update Github Actions - Core (non-major)",
       "automerge": true,
       "groupName": "all non-major github actions - Core",
-      "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
       "matchPackagePrefixes": ["actions"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
+      "description": "Update Github Actions (non-major)",
       "automerge": false,
       "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
-      "groupSlug": "all-minor-patch-actions",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
