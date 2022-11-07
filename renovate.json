@@ -24,31 +24,18 @@
     },
     {
       "automerge": true,
-      "excludePackagePatterns": [
-        "@types/react",
-        "@types/react-dom",
-        "react",
-        "react-dom",
-        "react-router-dom"
-      ],
+      "extends": ["monorepo:react", "schedule:nonOfficeHours"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major react dependencies",
+      "groupSlug": "react/all-minor-patch"
+    },
+    {
+      "automerge": true,
+      "extends": ["schedule:nonOfficeHours"],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "automerge": false,
-      "groupName": "all non-major dependencies - Core",
-      "groupSlug": "all-minor-patch-core",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": [
-        "@types/react",
-        "@types/react-dom",
-        "react",
-        "react-dom",
-        "react-router-dom"
-      ],
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
