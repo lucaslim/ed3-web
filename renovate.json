@@ -57,7 +57,7 @@
     },
     {
       "description": "Update Github Actions (non-major)",
-      "automerge": false,
+      "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
       "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
