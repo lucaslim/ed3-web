@@ -9,7 +9,6 @@
   "assignees": ["lucaslim"],
   "reviewers": ["team:retail-frontend-codeowners"],
   "labels": ["category/dependencies", "automation"],
-  "prCreation": "not-pending",
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
@@ -42,7 +41,7 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
-      "description": "Update Apollo Graphql Packages (non-major)",
+      "description": "Update Apollo GraphQL Packages (non-major)",
       "automerge": true,
       "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
       "groupName": "apollo graphql packages (non-major)",
