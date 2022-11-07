@@ -29,7 +29,7 @@
       "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update React Packages (non-major)",
@@ -37,36 +37,51 @@
       "extends": ["packages:react", "schedule:nonOfficeHours"],
       "groupName": "all non-major react dependencies",
       "matchPackageNames": ["@types/react", "@types/react-dom"],
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update React-Router Packages (non-major)",
       "automerge": true,
       "extends": ["monorepo:react-router", "schedule:nonOfficeHours"],
       "groupName": "all non-major react-router dependencies",
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update Apollo Graphql Packages (non-major)",
+      "automerge": true,
+      "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
+      "groupName": "all non-major apollo graphql dependencies",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update @Storybook monorepo Packages (non-major)",
+      "automerge": true,
+      "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
+      "groupName": "all non-major storybook monorepo dependencies",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update Apollo Packages (non-major)",
       "automerge": true,
       "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
       "groupName": "all non-major apollo graphql dependencies",
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
-      "description": "Update @Storybook monorepo Packages (non-major)",
+      "description": "Update linters (non-major)",
       "automerge": true,
-      "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
-      "groupName": "all non-major @storybook monorepo dependencies",
-      "matchUpdateTypes": ["patch", "minor"]
-    },
-    {
-      "description": "Update Github Actions (non-major)",
-      "automerge": true,
-      "extends": ["schedule:nonOfficeHours"],
-      "groupName": "all non-major github actions",
+      "extends": ["packages:linters", "schedule:nonOfficeHours"],
+      "groupName": "all non-major linters",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update unit test (non-major)",
+      "automerge": true,
+      "extends": ["packages:unitTest", "schedule:nonOfficeHours"],
+      "groupName": "all non-major unit test",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Lock @types/node and node engine to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
