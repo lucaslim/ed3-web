@@ -34,7 +34,7 @@
     {
       "description": "Update React Packages (non-major)",
       "automerge": true,
-      "extends": ["monorepo:react", "schedule:nonOfficeHours"],
+      "extends": ["packages:react", "schedule:nonOfficeHours"],
       "groupName": "all non-major react dependencies",
       "matchPackageNames": ["@types/react", "@types/react-dom"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
@@ -47,6 +47,13 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
+      "description": "Update Apollo Packages (non-major)",
+      "automerge": true,
+      "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
+      "groupName": "all non-major apollo graphql dependencies",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
       "description": "Update @Storybook monorepo Packages (non-major)",
       "automerge": true,
       "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
@@ -54,19 +61,9 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
-      "description": "Update Github Actions - Core (non-major)",
-      "automerge": true,
-      "extends": ["schedule:nonOfficeHours"],
-      "groupName": "all non-major github actions - Core",
-      "matchManagers": ["github-actions"],
-      "matchPackagePrefixes": ["actions"],
-      "matchUpdateTypes": ["digest", "patch", "minor"]
-    },
-    {
       "description": "Update Github Actions (non-major)",
       "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
-      "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
