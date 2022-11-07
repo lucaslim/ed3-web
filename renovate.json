@@ -1,6 +1,95 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
+  "enabledManagers": ["npm", "github-actions"],
+  "commitMessagePrefix": "Packages -",
+  "extends": ["config:base", "group:nodeJs", "schedule:weekly"],
+  "ignoreTests": false,
+  "platformAutomerge": true,
+  "rebaseWhen": "behind-base-branch",
+  "assignees": ["lucaslim"],
+  "reviewers": ["team:retail-frontend-codeowners"],
+  "labels": ["category/dependencies", "automation"],
+  "packageRules": [
+    {
+      "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
+      "matchDatasources": ["npm"],
+      "stabilityDays": 3
+    },
+    {
+      "description": "Update All Dependencies (non-major)",
+      "automerge": true,
+      "extends": ["schedule:nonOfficeHours"],
+      "groupName": "all dependencies (non-major)",
+      "groupSlug": "all-minor-patch",
+      "matchManagers": ["npm"],
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update React Packages (non-major)",
+      "automerge": true,
+      "extends": ["packages:react", "schedule:nonOfficeHours"],
+      "groupName": "react dependencies (non-major)",
+      "matchPackageNames": ["@types/react", "@types/react-dom"],
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update React-Router Packages (non-major)",
+      "automerge": true,
+      "extends": ["monorepo:react-router", "schedule:nonOfficeHours"],
+      "groupName": "react-router dependencies (non-major)",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update Apollo GraphQL Packages (non-major)",
+      "automerge": true,
+      "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
+      "groupName": "apollo graphql packages (non-major)",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update @Storybook monorepo Packages (non-major)",
+      "automerge": true,
+      "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
+      "groupName": "storybook monorepo dependencies (non-major)",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update linters (non-major)",
+      "automerge": true,
+      "extends": ["packages:linters", "schedule:nonOfficeHours"],
+      "groupName": "linters (non-major)",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update unit test (non-major)",
+      "automerge": true,
+      "extends": ["packages:unitTest", "schedule:nonOfficeHours"],
+      "groupName": "unit test packages (non-major)",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update Github Actions (non-major)",
+      "automerge": true,
+      "extends": ["schedule:nonOfficeHours"],
+      "groupName": "all github actions (non-major)",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Lock @types/node and node engine to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
+      "matchPackageNames": ["@types/node", "node"],
+      "allowedVersions": "14.17.6"
+    },
+    {
+      "description": "Lock ReactDayPicker to v7.x.x until major upgrade to v8 [ED-3011]",
+      "matchPackageNames": ["react-day-picker"],
+      "allowedVersions": "/^7(\\.[0-9]+)+/"
+    },
+    {
+      "description": "Lock @types/jest to match react-scripts version of jest (run `npm ls jest`)",
+      "matchPackageNames": ["@types/jest"],
+      "allowedVersions": "27.5.1"
+    }
   ]
 }
