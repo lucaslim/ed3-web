@@ -2,10 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["npm", "github-actions"],
   "commitMessagePrefix": "Packages -",
-  "dependencyDashboard": true,
-  "extends": ["config:base"],
-  "prConcurrentLimit": 10,
+  "extends": [
+    "config:base",
+    "group:nodeJs",
+    "group:storybookMonorepo",
+    "group:typescript-eslintMonorepo",
+    "schedule:weekly"
+  ],
+  "ignoreTests": false,
   "platformAutomerge": true,
+  "rebaseWhen": "behind-base-branch",
+  "assignees": ["lucaslim"],
+  "reviewers": ["team:retail-frontend-codeowners"],
+  "labels": ["category/dependencies", "automation"],
+  "prCreation": "not-pending",
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
@@ -13,8 +23,7 @@
       "stabilityDays": 3
     },
     {
-      "automerge": false,
-      "description": "All minor and patch-level non-core dependencies updates",
+      "automerge": true,
       "excludePackagePatterns": [
         "@types/react",
         "@types/react-dom",
@@ -30,7 +39,6 @@
     },
     {
       "automerge": false,
-      "description": "All minor and patch-level core dependencies updates",
       "groupName": "all non-major dependencies - Core",
       "groupSlug": "all-minor-patch-core",
       "matchManagers": ["npm"],
@@ -45,7 +53,6 @@
     },
     {
       "automerge": true,
-      "description": "All Github maintained actions",
       "groupName": "all non-major github actions - Core",
       "groupSlug": "all-minor-patch-actions-core",
       "matchManagers": ["github-actions"],
@@ -54,12 +61,26 @@
     },
     {
       "automerge": false,
-      "description": "All Github actions",
       "excludePackagePrefixes": ["actions"],
       "groupName": "all non-major github actions",
       "groupSlug": "all-minor-patch-actions",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "description": "Lock @types/node and node engine to current node version (discussion: https://eblock.slack.com/archives/C02TZN9H1CJ/p1666370390213959)",
+      "matchPackageNames": ["@types/node", "node"],
+      "allowedVersions": "14.17.6"
+    },
+    {
+      "description": "Lock ReactDayPicker to v7.x.x until major upgrade to v8 [ED-3011]",
+      "matchPackageNames": ["react-day-picker"],
+      "allowedVersions": "/^7(\\.[0-9]+)+/"
+    },
+    {
+      "description": "Lock @types/jest to match react-scripts version of jest (run `npm ls jest`)",
+      "matchPackageNames": ["@types/jest"],
+      "allowedVersions": "27.5.1"
     }
   ]
 }

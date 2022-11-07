@@ -21,7 +21,17 @@
     "react": "18.1.0"
   },
   "devDependencies": {
-    "@actions/github": "5.1.1",
+    "@actions/github": "5.1.0",
+    "@storybook/addon-a11y": "6.5.10",
+    "@storybook/addon-actions": "6.5.10",
+    "@storybook/addon-docs": "6.5.10",
+    "@storybook/addon-essentials": "6.5.10",
+    "@storybook/addon-links": "6.5.10",
+    "@storybook/addons": "6.5.10",
+    "@storybook/builder-webpack5": "6.5.10",
+    "@storybook/manager-webpack5": "6.5.10",
+    "@storybook/preset-create-react-app": "4.0.0",
+    "@storybook/react": "6.5.10",
     "@graphql-inspector/ci": "^3.4.0",
     "@types/axios": "0.14.0",
     "axios": "1.1.1",
