@@ -5,7 +5,6 @@
   "extends": [
     "config:base",
     "group:nodeJs",
-    "group:storybookMonorepo",
     "group:typescript-eslintMonorepo",
     "schedule:weekly"
   ],
@@ -37,6 +36,7 @@
       "automerge": true,
       "extends": ["monorepo:react", "schedule:nonOfficeHours"],
       "groupName": "all non-major react dependencies",
+      "matchPackageNames": ["@types/react", "@types/react-dom"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
@@ -44,6 +44,13 @@
       "automerge": true,
       "extends": ["monorepo:react-router", "schedule:nonOfficeHours"],
       "groupName": "all non-major react-router dependencies",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
+      "description": "Update @Storybook monorepo Packages (non-major)",
+      "automerge": true,
+      "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
+      "groupName": "all non-major @storybook monorepo dependencies",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
