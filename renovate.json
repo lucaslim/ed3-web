@@ -4,6 +4,7 @@
   "commitMessagePrefix": "Packages -",
   "extends": [
     "config:base",
+    ":disableRateLimiting",
     "group:nodeJs",
     "group:typescript-eslintMonorepo",
     "schedule:weekly"
