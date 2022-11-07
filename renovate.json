@@ -2,12 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["npm", "github-actions"],
   "commitMessagePrefix": "Packages -",
-  "extends": [
-    "config:base",
-    ":disableRateLimiting",
-    "group:nodeJs",
-    "schedule:weekly"
-  ],
+  "extends": ["config:base", "group:nodeJs", "schedule:weekly"],
   "ignoreTests": false,
   "platformAutomerge": true,
   "rebaseWhen": "behind-base-branch",
@@ -50,7 +45,7 @@
       "description": "Update Apollo Graphql Packages (non-major)",
       "automerge": true,
       "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
-      "groupName": "apollo graphql dependencies (non-major)",
+      "groupName": "apollo graphql packages (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
