@@ -27,17 +27,14 @@
     },
     {
       "description": "Update All Dependencies (non-major)",
-      "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
       "groupName": "all dependencies (non-major)",
-      "groupSlug": "all-minor-patch",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update React Packages (non-major)",
-      "automerge": true,
       "extends": ["packages:react", "schedule:nonOfficeHours"],
       "groupName": "react dependencies (non-major)",
       "matchPackageNames": ["@types/react", "@types/react-dom"],
@@ -45,42 +42,36 @@
     },
     {
       "description": "Update React-Router Packages (non-major)",
-      "automerge": true,
       "extends": ["monorepo:react-router", "schedule:nonOfficeHours"],
       "groupName": "react-router dependencies (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update Apollo GraphQL Packages (non-major)",
-      "automerge": true,
       "extends": ["packages:apollographql", "schedule:nonOfficeHours"],
       "groupName": "apollo graphql packages (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update @Storybook monorepo Packages (non-major)",
-      "automerge": true,
       "extends": ["monorepo:storybook", "schedule:nonOfficeHours"],
       "groupName": "storybook monorepo dependencies (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update linters (non-major)",
-      "automerge": true,
       "extends": ["packages:linters", "schedule:nonOfficeHours"],
       "groupName": "linters (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update unit test (non-major)",
-      "automerge": true,
       "extends": ["packages:unitTest", "schedule:nonOfficeHours"],
       "groupName": "unit test packages (non-major)",
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
       "description": "Update Github Actions (non-major)",
-      "automerge": true,
       "extends": ["schedule:nonOfficeHours"],
       "groupName": "all github actions (non-major)",
       "matchManagers": ["github-actions"],
