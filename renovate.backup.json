@@ -2,13 +2,23 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["npm", "github-actions"],
   "commitMessagePrefix": "Packages -",
-  "extends": ["config:base", "group:nodeJs", "schedule:weekly"],
-  "ignoreTests": false,
+  "extends": [
+    "config:base",
+    ":automergePatch",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":pinVersions",
+    ":prNotPending",
+    ":rebaseStalePrs",
+    ":separateMultipleMajorReleases",
+    "group:nodeJs",
+    "schedule:weekly"
+  ],
   "platformAutomerge": true,
-  "rebaseWhen": "behind-base-branch",
   "assignees": ["lucaslim"],
   "reviewers": ["team:retail-frontend-codeowners"],
   "labels": ["category/dependencies", "automation"],
+  "timezone": "America/Toronto",
   "packageRules": [
     {
       "description": "Prevent holding broken npm packages (https://docs.renovatebot.com/configuration-options/#prevent-holding-broken-npm-packages)",
