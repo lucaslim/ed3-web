@@ -35,7 +35,7 @@
     "@storybook/addons": "6.4.20",
     "@storybook/builder-webpack5": "6.4.20",
     "@storybook/manager-webpack5": "6.4.20",
-    "@storybook/preset-create-react-app": "4.0.0",
+    "@storybook/preset-create-react-app": "4.1.2",
     "@storybook/react": "6.4.20",
     "@types/axios": "0.14.0",
     "@types/react": "18.0.14",
@@ -43,6 +43,6 @@
     "axios": "1.1.1",
     "eslint": "8.25.0",
     "eslint-config-airbnb": "19.0.0",
-    "graphql": "16.4.0"
+    "graphql": "16.6.0"
   }
 }
