@@ -8,7 +8,7 @@
     ":automergePr",
     ":automergeRequireAllStatusChecks",
     ":pinVersions",
-    ":prNotPending",
+    ":prImmediately",
     ":rebaseStalePrs",
     ":separateMultipleMajorReleases",
     "group:nodeJs",
