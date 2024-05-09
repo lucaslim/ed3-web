@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3.5.0
+      - uses: actions/setup-node@v3.8.2
         with:
           node-version: "14.17"
 
@@ -29,7 +29,7 @@ jobs:
 
       - run: echo "hello world2" > src/store/api/graph/interfaces/types.ts
 
-      - uses: actions/cache@v3.0.10
+      - uses: actions/cache@v3.3.3
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -48,7 +48,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create/Update Pull Request for GraphQL SDL
-        uses: peter-evans/create-pull-request@v4.1.2
+        uses: peter-evans/create-pull-request@v4.2.4
         with:
           # token: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ steps.generate-token.outputs.token }}
