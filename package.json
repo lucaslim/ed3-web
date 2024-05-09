@@ -43,6 +43,6 @@
     "axios": "1.1.1",
     "eslint": "8.25.0",
     "eslint-config-airbnb": "19.0.0",
-    "graphql": "16.4.0"
+    "graphql": "16.8.1"
   }
 }
