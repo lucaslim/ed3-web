@@ -1,5 +1,5 @@
-name-template: "v$NEXT_MINOR_VERSION 🌈"
-tag-template: "v$NEXT_MINOR_VERSION"
+name-template: "v$RESOLVED_VERSION 💯"
+tag-template: "v$RESOLVED_VERSION"
 filter-by-commitish: true
 commitish: refs/heads/releases/prod-v1.0.0
 
