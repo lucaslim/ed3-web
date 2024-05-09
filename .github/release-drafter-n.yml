@@ -1,7 +1,7 @@
 name-template: "v$RESOLVED_VERSION 💯"
 tag-template: "v$RESOLVED_VERSION"
 filter-by-commitish: true
-commitish: main #refs/heads/releases/prod-v2.0.0
+commitish: refs/heads/releases/prod-v2.0.0
 include-pre-releases: true
 
 sort-by: "merged_at"
