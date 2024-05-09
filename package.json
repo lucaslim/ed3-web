@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/lucaslim/ed3-web#readme",
   "dependencies": {
-    "@apollo/client": "3.7.0",
+    "@apollo/client": "3.10.2",
     "apollo-upload-client": "16.0.0",
     "graphql-inspector": "0.5.1",
     "jest": "29.2.0",
