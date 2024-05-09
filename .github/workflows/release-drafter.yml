@@ -38,7 +38,7 @@ jobs:
           config-name: release-drafter.yml
           name: 2.0.2
           tag: 2.0.2
-          version: 2.0.1
+          version: 2.0.2
           commitish: hotfix/2.0.2
         #   disable-autolabeler: true
         env:
