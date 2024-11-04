@@ -47,7 +47,7 @@ jobs:
       - name: Slack Notification (include Actor)
         id: slack-include-actor
         if: ${{ inputs.asAttachment }}
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slackapi/slack-github-action@v1.26.0
         with:
           channel-id: C0461JBK90R
           payload: >-
@@ -74,7 +74,7 @@ jobs:
       - name: Slack Notification
         id: slack
         if: ${{ !inputs.asAttachment }}
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slackapi/slack-github-action@v1.26.0
         with:
           channel-id: C0461JBK90R
           payload: >-

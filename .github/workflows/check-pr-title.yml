@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate App Token
-        uses: tibdex/github-app-token@v1.7.0
+        uses: tibdex/github-app-token@v1.9.0
         id: generate-token
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: actions/github-script@v6.3.3
+      - uses: actions/github-script@v6.4.1
         id: pr-title
         with:
           script: |
@@ -59,7 +59,7 @@ jobs:
 
       - if: ${{ success() && steps.fc.outputs.comment-node-id != '' }}
         continue-on-error: true
-        uses: actions/github-script@v6.3.3
+        uses: actions/github-script@v6.4.1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           script: |
