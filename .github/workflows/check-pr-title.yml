@@ -42,7 +42,7 @@ jobs:
           direction: last
 
       - if: ${{ failure() }}
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ steps.generate-token.outputs.token }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
